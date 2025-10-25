@@ -18,3 +18,15 @@ openai:
   base-url: https://api.openai.com
   model: gpt-4o-mini
   timeout-seconds: 60
+
+security:
+  jwt:
+    issuer: sales-assistant
+    secret: ${JWT_SECRET:dev-please-change-this-32+chars}
+    expires-minutes: 60
+
+kb:
+  file-path: classpath:kb/kb.txt
+  chunk-size: 700        # soft limit; chunks split again if too long
+  top-k: 4               # how many chunks to include in context
+

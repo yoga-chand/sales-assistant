@@ -1,4 +1,4 @@
-package com.apple.salesassistant.llm;
+package com.apple.salesassistant.chat.llm;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;

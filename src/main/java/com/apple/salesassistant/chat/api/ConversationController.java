@@ -1,6 +1,7 @@
-package com.apple.salesassistant.api;
+package com.apple.salesassistant.chat.api;
 
-import com.apple.salesassistant.service.ChatService;
+import com.apple.salesassistant.chat.service.ChatService;
+import com.apple.salesassistant.chat.service.GroundedChatService;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -19,7 +21,7 @@ public class ConversationController {
 //    private final MessageService messageService;
 
     @Autowired
-    private ChatService chatService;
+    private GroundedChatService groundedChatService;
 
 //    public ConversationController(ConversationService conversationService, MessageService messageService) {
 //        this.conversationService = conversationService;
@@ -31,12 +33,13 @@ public class ConversationController {
     public record CreateConversationResponse(UUID id, String title, Instant createdAt) {}
 
     @PostMapping("/conversations")
-    public ResponseEntity<CreateConversationResponse> createConversation(@RequestBody(required = false) CreateConversationRequest req) {
+    public ResponseEntity<Map<String, Object>> createConversation(@RequestBody(required = false) CreateConversationRequest req) {
 //        var conv = conversationService.create(req == null ? null : req.title());
 //        return new CreateConversationResponse(conv.id(), conv.title(), conv.createdAt());
        // CreateConversationResponse response = new CreateConversationResponse(UUID.randomUUID(), chatService.chatWithDefaults(req.title()), Instant.now());
-        CreateConversationResponse response = new CreateConversationResponse(UUID.randomUUID(), chatService.chat(req.title()), Instant.now());
-          return ResponseEntity.ok(response);
+        Map<String, Object> answer = groundedChatService.answer(req.title());
+        //CreateConversationResponse response = new CreateConversationResponse(UUID.randomUUID(), chatService.chat(req.title()), Instant.now());
+          return ResponseEntity.ok(answer);
     }
 
 //    // === Append message (sync LLM) ===
