@@ -1,4 +1,4 @@
-package com.apple.salesassistant.llm;
+package com.apple.salesassistant.chat.llm;
 
 import com.apple.salesassistant.configuration.OpenAiConfig;
 import lombok.AllArgsConstructor;

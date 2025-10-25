@@ -1,106 +1,222 @@
 # Company Overview
-Apple (Demo Data): diversified product portfolio across iPhone, Mac, iPad, Wearables (Watch, AirPods), and Services (iCloud, Apple Music, TV+, Arcade, App Store). Fiscal year (FY) runs Oct–Sep.
+Apple (Demo Data): diversified product portfolio across iPhone, Mac, iPad, Wearables (Watch, AirPods), and Services (iCloud, Apple Music, TV+, Arcade, App Store). Fiscal year (FY) runs Oct–Sep. All figures below are synthetic and for demonstration only.
 
-# Global Summary — FY2024 Q3
-Global revenue: $92.3B (+6% QoQ, +3% YoY).
-Gross margin: 44.1% (driven by Services mix).
-Top-line drivers: iPhone premium mix (Pro/Pro Max), Services ARPU growth, Watch SE refresh in APAC.
-Headwinds: soft consumer PC demand in EMEA; FX pressure in Japan.
+# GLOBAL SUMMARY — FY2023 (Demo)
+Total revenue: $377.9B (+2% YoY).
+Gross margin: 43.0% (Services mix up).
+Top-line drivers: iPhone premium mix (Pro/Pro Max), Services subscriber growth, back-to-school bundles in Americas.
+Headwinds: Android flagship discounting in EMEA; FX volatility in Japan; soft consumer PC demand.
 
-# Regional Performance
-Americas: $38.5B (+5% QoQ) — strength in carrier promos and back-to-school bundles.
-EMEA: $20.1B (+2% QoQ) — macro softness; Services resilient.
-Greater China: $15.2B (+8% QoQ) — strong Pro/Pro Max demand, retail footprint expansion.
-Japan: $6.1B (+1% QoQ) — FX headwind offset by Services growth.
-Rest of Asia Pacific (RAPAC): $12.4B (+9% QoQ) — Watch and iPad education deals; India iPhone channel scaling.
+# PRODUCT MIX (Revenue, YoY %) — FY2023
+iPhone: $199.1B (+3%)
+Mac: $40.3B (-1%)
+iPad: $31.0B (+2%)
+Wearables (Watch, AirPods): $41.5B (+2%)
+Services: $66.0B (+6%), ARR ~$78B
 
-# Product Mix (Revenue, QoQ %, YoY %)
-iPhone: $47.8B (+9% QoQ, +4% YoY)
-Mac: $9.6B (+3% QoQ, -2% YoY)
-iPad: $6.9B (+6% QoQ, +1% YoY)
-Wearables (Watch, AirPods): $10.5B (+7% QoQ, +2% YoY)
-Services: $17.5B (+4% QoQ, +8% YoY), ARR ~$84B
+# REGIONAL PERFORMANCE — FY2023
+Americas: $152.5B (+2%) — strong carrier promotions, AppleCare attach +3pp.
+EMEA: $88.4B (+1%) — resilient Services despite macro softness.
+Greater China: $73.8B (+3%) — Pro/Pro Max demand; retail footprint expansion.
+Japan: $24.1B (-1%) — FX headwind; partial offset from Services bundles.
+Rest of Asia Pacific (RAPAC): $39.1B (+4%) — education and SMB device programs.
 
-# iPhone Details
-Units: 57.3M (ASP: $835)
+# iPhone Details — FY2023
+Units: 219.0M (ASP: $910)
+Mix: Pro/Pro Max 55%, Plus 13%, base 32%
+Drivers: carrier trade-ins; camera/AI features; APAC retail expansion
+Risks: upgrade fatigue in EMEA mid-tier; aggressive Android promos
+
+# Mac Details — FY2023
+Units: 21.1M (ASP: $1,910)
+Mix: MacBook Pro 60%, MacBook Air 30%, Desktop 10%
+Enterprise: device-as-a-service pilots; developer teams standardizing on Pro
+Headwinds: consumer PC softness in EMEA
+
+# iPad Details — FY2023
+Units: 48.2M (ASP: $640)
+Education: RAPAC bulk orders (digital classroom); Japan tablet-first programs
+Use-cases: field service; retail POS pilots
+Attach: Pencil 29% of iPad buyers; Keyboard 17%
+
+# Wearables (Watch, AirPods) — FY2023
+Watch: $24.2B (+3%) — health features; SE value prop
+AirPods: $17.3B (+2%) — multi-point connectivity adoption; education bundles
+
+# Services — Deep Dive — FY2023
+App Store: $26.8B (+5%) — gaming stabilization, productivity up
+iCloud: $12.0B (+7%) — storage tier upgrades (2TB/6TB)
+Apple Music: $7.2B (+5%) — Lossless catalog, family plans
+TV+: $3.6B (+4%) — limited series growth
+Arcade: $2.4B (+3%) — family plan uptake
+Payments & Other: $14.0B (+6%)
+MAU: 1.18B devices; Paid subscriptions: 0.98B; Services ARPU: $15.7/quarter
+Churn: Music 1.9%, iCloud 2.7%, Arcade 3.4%
+
+# GLOBAL SUMMARY — FY2024 (Demo)
+Total revenue: $389.6B (+3% YoY).
+Gross margin: 44.1% (Services mix accretive).
+Top-line drivers: iPhone premium mix shift; Services ARPU growth; Watch SE refresh in APAC.
+Headwinds: EMEA PC softness; FX in Japan; supply normalization.
+
+# PRODUCT MIX (Revenue, YoY %) — FY2024
+iPhone: $207.5B (+4%)
+Mac: $41.5B (+3%)
+iPad: $32.2B (+4%)
+Wearables: $44.1B (+6%)
+Services: $64.3B (-3%) *mix shift note: accounting reclass in demo data; underlying subs +8%*
+
+# REGIONAL PERFORMANCE — FY2024
+Americas: $160.1B (+5%) — carrier BOGO promos boosted Pro Max; AppleCare add-ons
+EMEA: $90.2B (+2%) — macro soft; Services resilient
+Greater China: $76.8B (+4%) — retail-exclusive colorways lifted footfall
+Japan: $24.6B (+2%) — FX headwind offset by Services growth
+RAPAC: $37.9B (+1%) — education deals; India iPhone channel scaling
+
+# iPhone Details — FY2024
+Units: 224.7M (ASP: $923)
 Mix: Pro/Pro Max 58%, Plus 14%, base 28%
-Drivers: carrier trade-ins, camera/AI features, APAC retail expansion
-Risks: upgrade fatigue in EMEA mid-tier; competitive Android promos
+Drivers: trade-ins; premium skew; camera/AI; APAC retail expansion
 Notables by region:
-- Americas: carrier BOGO promos boosted Pro Max
-- Greater China: retail-exclusive colorways lifted footfall
+- Americas: carrier BOGO lifted Pro Max mix
+- Greater China: retail-exclusive colors
 - RAPAC: installment financing improved conversion
 
-# Mac Details
-Units: 5.0M (ASP: $1,920)
-Mix: MacBook Pro 62%, MacBook Air 28%, Desktop 10%
-Enterprise: device-as-a-service pilots; TCO narrative winning developer teams
-Headwinds: consumer PC softness EMEA
-Education: RAPAC and Japan iPad-first; Mac labs in select universities
+# Mac Details — FY2024
+Units: 21.8M (ASP: $1,905)
+Mix: MacBook Pro 62%, Air 28%, Desktop 10%
+Enterprise: strong in developer/data-science roles
+Education: RAPAC and Japan still iPad-first; Mac labs selective
 
-# iPad Details
-Units: 11.1M (ASP: $620)
-Education: RAPAC bulk orders (digital classroom initiatives)
-Use-cases: field service, retail POS pilots
-Attach: Apple Pencil 31% of iPad buyers; Keyboard 18%
+# iPad Details — FY2024
+Units: 49.7M (ASP: $650)
+Education: RAPAC bulk orders continue
+Use-cases: field service, retail POS
+Attach: Pencil 31%; Keyboard 18%
 
-# Wearables (Watch, AirPods)
-Watch: $6.1B (+8% QoQ) — SE refresh, health features
-AirPods: $4.4B (+5% QoQ) — multi-point connectivity adoption
-Bundles: Back-to-school bundles (Mac + Watch SE) raised AOV by 14% in Americas
+# Wearables — FY2024
+Watch: $25.9B (+7%) — SE refresh, new health features
+AirPods: $18.2B (+5%) — education + SMB bundles
 
-# Services — Deep Dive
-App Store: $7.1B (+5% QoQ) — gaming stabilization, productivity apps up
-iCloud: $3.2B (+6% QoQ) — storage tier upgrades (2TB/6TB)
-Apple Music: $1.8B (+4% QoQ) — Lossless catalog promoted
-TV+: $0.9B (+3% QoQ) — limited series performance
-Arcade: $0.6B (+2% QoQ) — family plan uptake
-Payments & Other: $3.9B (+5% QoQ)
-MAU: 1.24B devices; Paid subscriptions: 1.05B; Services ARPU: $16.2/quarter
-Churn: 1.8% (Music), 2.5% (iCloud), 3.2% (Arcade)
+# Services — Deep Dive — FY2024
+App Store: $27.9B (+4%) — productivity & creativity apps up
+iCloud: $13.1B (+9%) — upsell to 6TB
+Music: $7.5B (+4%)
+TV+: $3.8B (+5%)
+Arcade: $2.5B (+4%)
+Payments & Other: $13.0B (-7%) *demo accounting*
+MAU: 1.24B devices; Paid subs: 1.05B; ARPU: $16.2/quarter
+Churn: Music 1.8%, iCloud 2.5%, Arcade 3.2%
 
-# Channel Insights
-Online: 34% of revenue; same-day delivery coverage expanded in 28 cities
-Retail: NPS 78; in-store trade-ins +21% QoQ
-Carrier: Pro/Pro Max subsidies improved mix; push on AppleCare add-ons
+# GLOBAL SUMMARY — FY2025 (Demo to-date / Outlook)
+*Note: demo outlook for showcasing 2025 scenarios.*
+Total revenue (outlook): $404.0B (+4% YoY).
+Gross margin (outlook): 44.5%.
+Top-line drivers (expected): iPhone Pro/Pro Max mix sustained; Services cross-bundle; entry Watch + iPhone trade-in programs in APAC/India.
+Risks: FX volatility; Android flagship promotions in EMEA; macro in Europe.
+
+# PRODUCT MIX (Revenue, YoY %) — FY2025 (Outlook)
+iPhone: $215.8B (+4%)
+Mac: $42.3B (+2%)
+iPad: $33.4B (+4%)
+Wearables: $46.8B (+6%)
+Services: $65.7B (+2%)
+
+# REGIONAL PERFORMANCE — FY2025 (Outlook)
+Americas: $165.9B (+4%) — strong carrier partnerships, AppleCare attach +2pp
+EMEA: $92.0B (+2%) — cautious consumer; enterprise Macs steady
+Greater China: $79.1B (+3%) — Pro/Pro Max sustained; retail footprint
+Japan: $25.0B (+2%) — FX watch; Services bundle stickiness
+RAPAC: $41.9B (+11%) — India channel expansion; education device programs
+
+# iPhone Details — FY2025 (Outlook)
+Units: 229.8M (ASP: $939)
+Mix: Pro/Pro Max 60%, Plus 13%, base 27%
+Drivers: on-device AI features; camera pipeline; financing/trade-ins
+Risks: mid-tier Android promos; elongating upgrade cycles (36–40 months)
+
+# Mac Details — FY2025 (Outlook)
+Units: 22.0M (ASP: $1,920)
+Mix: Pro 63%, Air 27%, Desktop 10%
+Enterprise: device-as-a-service expansion; pro media/ML workflows
+
+# iPad Details — FY2025 (Outlook)
+Units: 50.9M (ASP: $655)
+Education: RAPAC and India deployments
+Attach: Pencil 32%; Keyboard 19%
+
+# Wearables — FY2025 (Outlook)
+Watch: $27.4B (+6%) — health/fitness integrations
+AirPods: $19.4B (+7%) — SMB & education bundles
+
+# Services — Deep Dive — FY2025 (Outlook)
+App Store: $28.7B (+3%)
+iCloud: $13.9B (+6%)
+Music: $7.9B (+5%)
+TV+: $4.1B (+7%)
+Arcade: $2.7B (+8%)
+Payments & Other: $8.3B (*demo smoothing*)
+MAU: 1.30B; Paid subs: 1.11B; ARPU: $16.7/quarter
+Churn: Music 1.7%, iCloud 2.4%, Arcade 3.1%
+
+# Channel Insights (Cross-Year)
+Online: 35% of revenue; same-day delivery in 35 cities (demo)
+Retail: NPS 79; in-store trade-ins +22% YoY
+Carrier: Pro/Pro Max subsidies improved mix; AppleCare add-ons
 Education & Gov: tablet-first deployments; security posture wins RFPs
 
-# Customer Segments
-Consumer: upgrade cycles elongating to ~36 months; premium skew persists
-Enterprise: Mac share growing in developer/data-science roles; MDM adoption steady
-SMB: financing and trade-in critical; Apple Business Essentials attach 22%
+# Customer Segments (Cross-Year)
+Consumer: upgrade cycles elongating to ~36–40 months; premium skew persists
+Enterprise: Mac share growing in developer/data-science; MDM adoption steady
+SMB: financing and trade-in critical; Apple Business Essentials attach 23%
 
-# Promotions & Pricing
-Trade-in credit avg: $380 (iPhone 13/14 owners)
-Bundles: Back-to-school (Americas), Festive bundle (India) uplifted AOV
+# Promotions & Pricing (Cross-Year)
+Trade-in credit avg: $385 (iPhone 13/14/15 owners)
+Bundles: Back-to-school (Americas), Festive (India) lifted AOV by 12–15%
 Pricing: selective price protection in Japan due to FX
 
-# Competitive Landscape
-Android flagship discounting intensified in EMEA
-PC competitors pushing AI-PC narrative; Apple counters with on-device ML features
-Tablet competition focused on education price points; Apple leans into ecosystem + Pencil apps
+# Competitive Landscape (Cross-Year)
+Android flagship discounting intensified in EMEA; camera/AI features as battleground
+PC competitors pushing AI-PC narrative; Apple counters with on-device ML + battery efficiency
+Tablet competition emphasizes education price points; Apple leans into ecosystem + Pencil apps
 
-# Q3 Executive Talking Points
-- iPhone mix shift to premium sustained; Services margin accretive
-- RAPAC momentum from education and Watch
-- EMEA remains cautious; focus on Services, financing, and trade-in
-- FY2024 exit rate suggests mid-single-digit growth if mix holds
+# Q4/FY EXECUTIVE TALKING POINTS — FY2023
+- Premium iPhone mix sustained; Services margin accretive
+- RAPAC momentum (education + SMB financing)
+- EMEA remains cautious; focus on Services and trade-in
+- Exit rate suggests low-single-digit growth if mix holds
 
-# Operational Notes
-Supply: lead times normalized except certain colorways
-Logistics: ocean→air shift limited to launches; cost discipline intact
+# Q4/FY EXECUTIVE TALKING POINTS — FY2024
+- iPhone Pro/Pro Max mix stepped up; Watch SE refresh aided APAC
+- Services ARPU up; paid subs >1.05B
+- EMEA macro watch; FX in Japan a headwind
+- FY2025 outlook mid-single-digit growth on premium mix + bundles
+
+# Q4/FY EXECUTIVE TALKING POINTS — FY2025 (Outlook)
+- Premium iPhone mix ~60% Pro/Pro Max; Services cross-bundle traction
+- India & APAC scaling; education and SMB financing engines
+- Watch health features and AirPods bundles support wearables growth
+- Risks: EMEA macro, FX, competitive promos
+
+# Operational Notes (Cross-Year)
+Supply: lead times normalized except certain colorways at launch
+Logistics: ocean→air shift limited to launches; disciplined freight cost
 Sustainability: recycled materials in Watch SE; supplier clean energy milestones
 
+# Confidential: SKU-Level iPhone Margins (Demo)
+[Confidential] Pro: ~41–44% gross margin; Pro Max: ~42–45%; Base/Plus: ~33–36%
+[Confidential] Regional variance ±2–3pp due to logistics and promo intensity
+
+# Confidential: Partner Terms & Rebates (Demo)
+[Confidential] Carrier MDF and trade-in support vary by quarter; Americas highest elasticity; EMEA tighter ROI thresholds
+[Confidential] Education volume rebates on iPad in RAPAC and Japan
+
 # Pipeline (Forward-Looking, Demo Only)
-- iPhone next-gen: improved low-light AI features
-- Mac: pro workflows acceleration (media/ML)
-- iPad: education suite enhancements
-- Services: cross-bundle (Music+TV+) family plan experiments
+- iPhone next-gen: improved low-light AI features; on-device ML assistants
+- Mac: pro workflows acceleration (media/ML); NPU utilization narratives
+- iPad: education suite enhancements; Pencil ecosystem
+- Services: cross-bundle (Music+TV+) family experiments; device-tied storage upsell
 
 # Glossary
-QoQ: Quarter-over-Quarter
-YoY: Year-over-Year
-ARR: Annual Recurring Revenue
-AOV: Average Order Value
-RAPAC: Rest of Asia Pacific
-NPS: Net Promoter Score
+QoQ: Quarter-over-Quarter | YoY: Year-over-Year | ARR: Annual Recurring Revenue
+AOV: Average Order Value | RAPAC: Rest of Asia Pacific | NPS: Net Promoter Score

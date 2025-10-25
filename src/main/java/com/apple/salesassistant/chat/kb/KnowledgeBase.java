@@ -1,4 +1,4 @@
-package com.apple.salesassistant.kb;
+package com.apple.salesassistant.chat.kb;
 
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;

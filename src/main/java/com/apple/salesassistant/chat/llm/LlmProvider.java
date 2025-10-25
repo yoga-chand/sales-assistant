@@ -1,4 +1,4 @@
-package com.apple.salesassistant.llm;
+package com.apple.salesassistant.chat.llm;
 
 import java.util.List;
 import java.util.Map;
