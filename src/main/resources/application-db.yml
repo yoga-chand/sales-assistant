@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sales_assistant
+    username: sa_user
+    password: sa_pass
+  jpa:
+    hibernate:
+      ddl-auto: update   # or update for quick dev
+    properties:
+      hibernate.jdbc.time_zone: UTC
+  flyway:
+    enabled: false          # or false until you add migrations

@@ -1,0 +1,31 @@
+package com.apple.salesassistant.llm;
+
+import com.apple.salesassistant.configuration.LlmRuntimeProps;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+@Component
+public class LlmProviderSelector {
+
+    private final Map<String, LlmProvider> registry;
+    private final String defaultKey;
+
+    public LlmProviderSelector(List<LlmProvider> providers, LlmRuntimeProps props) {
+        this.registry = providers.stream().collect(Collectors.toUnmodifiableMap(
+                LlmProvider::key, Function.identity()
+        ));
+        this.defaultKey = props.provider();
+    }
+
+    public LlmProvider select(Optional<String> overrideKey) {
+        String key = overrideKey.filter(k -> registry.containsKey(k)).orElse(defaultKey);
+        LlmProvider p = registry.get(key);
+        if (p == null) throw new IllegalArgumentException("Unknown LLM provider: " + key);
+        return p;
+    }
+}

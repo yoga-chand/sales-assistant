@@ -1,0 +1,55 @@
+plugins {
+    id 'org.springframework.boot' version '3.3.4'
+    id 'io.spring.dependency-management' version '1.1.5'
+    id 'java'
+}
+
+group = 'com.apple'
+version = '0.0.1-SNAPSHOT'
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // --- Spring Boot core ---
+    //implementation 'org.springframework.boot:spring-boot-starter-webflux'     // WebClient + reactive HTTP server
+    implementation 'org.springframework.boot:spring-boot-starter-validation'   // @Valid, Jakarta validation
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // --- Persistence (for later milestones) ---
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.postgresql:postgresql:42.7.4'
+    implementation 'org.flywaydb:flyway-core'
+
+    // --- Redis (rate limit / async queue, optional for now) ---
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // --- Security (you’ll add JWT/RBAC later) ---
+//    implementation 'org.springframework.boot:spring-boot-starter-security'
+//    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+//    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+//    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    // --- Observability (metrics / health) ---
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
+    // --- Utils ---
+    implementation 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // --- Testing ---
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:postgresql'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

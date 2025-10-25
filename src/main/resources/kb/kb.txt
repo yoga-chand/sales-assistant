@@ -1,0 +1,106 @@
+# Company Overview
+Apple (Demo Data): diversified product portfolio across iPhone, Mac, iPad, Wearables (Watch, AirPods), and Services (iCloud, Apple Music, TV+, Arcade, App Store). Fiscal year (FY) runs Oct–Sep.
+
+# Global Summary — FY2024 Q3
+Global revenue: $92.3B (+6% QoQ, +3% YoY).
+Gross margin: 44.1% (driven by Services mix).
+Top-line drivers: iPhone premium mix (Pro/Pro Max), Services ARPU growth, Watch SE refresh in APAC.
+Headwinds: soft consumer PC demand in EMEA; FX pressure in Japan.
+
+# Regional Performance
+Americas: $38.5B (+5% QoQ) — strength in carrier promos and back-to-school bundles.
+EMEA: $20.1B (+2% QoQ) — macro softness; Services resilient.
+Greater China: $15.2B (+8% QoQ) — strong Pro/Pro Max demand, retail footprint expansion.
+Japan: $6.1B (+1% QoQ) — FX headwind offset by Services growth.
+Rest of Asia Pacific (RAPAC): $12.4B (+9% QoQ) — Watch and iPad education deals; India iPhone channel scaling.
+
+# Product Mix (Revenue, QoQ %, YoY %)
+iPhone: $47.8B (+9% QoQ, +4% YoY)
+Mac: $9.6B (+3% QoQ, -2% YoY)
+iPad: $6.9B (+6% QoQ, +1% YoY)
+Wearables (Watch, AirPods): $10.5B (+7% QoQ, +2% YoY)
+Services: $17.5B (+4% QoQ, +8% YoY), ARR ~$84B
+
+# iPhone Details
+Units: 57.3M (ASP: $835)
+Mix: Pro/Pro Max 58%, Plus 14%, base 28%
+Drivers: carrier trade-ins, camera/AI features, APAC retail expansion
+Risks: upgrade fatigue in EMEA mid-tier; competitive Android promos
+Notables by region:
+- Americas: carrier BOGO promos boosted Pro Max
+- Greater China: retail-exclusive colorways lifted footfall
+- RAPAC: installment financing improved conversion
+
+# Mac Details
+Units: 5.0M (ASP: $1,920)
+Mix: MacBook Pro 62%, MacBook Air 28%, Desktop 10%
+Enterprise: device-as-a-service pilots; TCO narrative winning developer teams
+Headwinds: consumer PC softness EMEA
+Education: RAPAC and Japan iPad-first; Mac labs in select universities
+
+# iPad Details
+Units: 11.1M (ASP: $620)
+Education: RAPAC bulk orders (digital classroom initiatives)
+Use-cases: field service, retail POS pilots
+Attach: Apple Pencil 31% of iPad buyers; Keyboard 18%
+
+# Wearables (Watch, AirPods)
+Watch: $6.1B (+8% QoQ) — SE refresh, health features
+AirPods: $4.4B (+5% QoQ) — multi-point connectivity adoption
+Bundles: Back-to-school bundles (Mac + Watch SE) raised AOV by 14% in Americas
+
+# Services — Deep Dive
+App Store: $7.1B (+5% QoQ) — gaming stabilization, productivity apps up
+iCloud: $3.2B (+6% QoQ) — storage tier upgrades (2TB/6TB)
+Apple Music: $1.8B (+4% QoQ) — Lossless catalog promoted
+TV+: $0.9B (+3% QoQ) — limited series performance
+Arcade: $0.6B (+2% QoQ) — family plan uptake
+Payments & Other: $3.9B (+5% QoQ)
+MAU: 1.24B devices; Paid subscriptions: 1.05B; Services ARPU: $16.2/quarter
+Churn: 1.8% (Music), 2.5% (iCloud), 3.2% (Arcade)
+
+# Channel Insights
+Online: 34% of revenue; same-day delivery coverage expanded in 28 cities
+Retail: NPS 78; in-store trade-ins +21% QoQ
+Carrier: Pro/Pro Max subsidies improved mix; push on AppleCare add-ons
+Education & Gov: tablet-first deployments; security posture wins RFPs
+
+# Customer Segments
+Consumer: upgrade cycles elongating to ~36 months; premium skew persists
+Enterprise: Mac share growing in developer/data-science roles; MDM adoption steady
+SMB: financing and trade-in critical; Apple Business Essentials attach 22%
+
+# Promotions & Pricing
+Trade-in credit avg: $380 (iPhone 13/14 owners)
+Bundles: Back-to-school (Americas), Festive bundle (India) uplifted AOV
+Pricing: selective price protection in Japan due to FX
+
+# Competitive Landscape
+Android flagship discounting intensified in EMEA
+PC competitors pushing AI-PC narrative; Apple counters with on-device ML features
+Tablet competition focused on education price points; Apple leans into ecosystem + Pencil apps
+
+# Q3 Executive Talking Points
+- iPhone mix shift to premium sustained; Services margin accretive
+- RAPAC momentum from education and Watch
+- EMEA remains cautious; focus on Services, financing, and trade-in
+- FY2024 exit rate suggests mid-single-digit growth if mix holds
+
+# Operational Notes
+Supply: lead times normalized except certain colorways
+Logistics: ocean→air shift limited to launches; cost discipline intact
+Sustainability: recycled materials in Watch SE; supplier clean energy milestones
+
+# Pipeline (Forward-Looking, Demo Only)
+- iPhone next-gen: improved low-light AI features
+- Mac: pro workflows acceleration (media/ML)
+- iPad: education suite enhancements
+- Services: cross-bundle (Music+TV+) family plan experiments
+
+# Glossary
+QoQ: Quarter-over-Quarter
+YoY: Year-over-Year
+ARR: Annual Recurring Revenue
+AOV: Average Order Value
+RAPAC: Rest of Asia Pacific
+NPS: Net Promoter Score
