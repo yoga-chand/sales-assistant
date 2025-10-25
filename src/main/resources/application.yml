@@ -5,7 +5,7 @@ spring:
     include: db
 
 llm:
-  provider: ollama        # or ollama
+  provider: openai        # or ollama
   system-prompt: classpath:prompts/system_prompt.txt
 
 ollama:
@@ -29,4 +29,11 @@ kb:
   file-path: classpath:kb/kb.txt
   chunk-size: 700        # soft limit; chunks split again if too long
   top-k: 4               # how many chunks to include in context
-
+#
+#logging:
+#  level:
+#    org.springframework.security: DEBUG           # or DEBUG
+#    org.springframework.security.web.access: DEBUG
+#    org.springframework.security.web.access.intercept: DEBUG
+#    org.springframework.security.authorization: DEBUG   # method security decisions
+#    org.springframework.security.web.FilterChainProxy: DEBUG
