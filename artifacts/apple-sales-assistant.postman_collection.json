@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "4051e649-448c-48a4-84ed-9451e23e2ba0",
+		"name": "apple-sales-assistant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49539310"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"analyst@demo\",\n    \"password\": \"analyst\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-conversation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Summarize Apple’s iPhone sales trends in FY2024.\" \n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/conversations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"conversations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post-message",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\": \"How many units sold\" \n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/conversations/00fa17ff-a850-4574-9fe5-d364e50005b9/messages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"conversations",
+						"00fa17ff-a850-4574-9fe5-d364e50005b9",
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-conversation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzYWxlcy1hc3Npc3RhbnQiLCJzdWIiOiJ1MyIsImF1ZCI6ImFwaSIsImlhdCI6MTc2MTQ0Njg2MywiZXhwIjoxNzYxNDUwNDYzLCJlbWFpbCI6ImFkbWluQGRlbW8iLCJyb2xlcyI6WyJST0xFX0FETUlOIl0sInNjb3BlcyI6WyJrYjpyZWFkOmRldGFpbCIsImF1ZGl0OnJlYWQiLCJjaGF0Omludm9rZSIsImNvbnY6cmVhZCIsImNvbnY6d3JpdGUiLCJhZG1pbjptb2RlbDpzZXQiLCJjb252OnJlYWQ6YW55Il19.AhEntXpskl6FgtjZ1e6cHL4wgRB-QTfOKFORLBSPSvM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/conversations/00fa17ff-a850-4574-9fe5-d364e50005b9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"conversations",
+						"00fa17ff-a850-4574-9fe5-d364e50005b9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-messages",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzYWxlcy1hc3Npc3RhbnQiLCJzdWIiOiJ1MyIsImF1ZCI6ImFwaSIsImlhdCI6MTc2MTQ0Njg2MywiZXhwIjoxNzYxNDUwNDYzLCJlbWFpbCI6ImFkbWluQGRlbW8iLCJyb2xlcyI6WyJST0xFX0FETUlOIl0sInNjb3BlcyI6WyJrYjpyZWFkOmRldGFpbCIsImF1ZGl0OnJlYWQiLCJjaGF0Omludm9rZSIsImNvbnY6cmVhZCIsImNvbnY6d3JpdGUiLCJhZG1pbjptb2RlbDpzZXQiLCJjb252OnJlYWQ6YW55Il19.AhEntXpskl6FgtjZ1e6cHL4wgRB-QTfOKFORLBSPSvM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer ",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/conversations/00fa17ff-a850-4574-9fe5-d364e50005b9/messages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"conversations",
+						"00fa17ff-a850-4574-9fe5-d364e50005b9",
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "guest-chat",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\": \"Summarize Apple’s iPhone sales trends in FY2024.\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/messages:complete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"messages:complete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
