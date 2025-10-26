@@ -29,6 +29,12 @@ kb:
   file-path: classpath:kb/kb.txt
   chunk-size: 700        # soft limit; chunks split again if too long
   top-k: 4               # how many chunks to include in context
+
+logging:
+  level:
+    root: INFO
+    com.apple: DEBUG
+
 #
 #logging:
 #  level:

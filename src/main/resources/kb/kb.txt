@@ -220,3 +220,6 @@ Sustainability: recycled materials in Watch SE; supplier clean energy milestones
 # Glossary
 QoQ: Quarter-over-Quarter | YoY: Year-over-Year | ARR: Annual Recurring Revenue
 AOV: Average Order Value | RAPAC: Rest of Asia Pacific | NPS: Net Promoter Score
+
+        //UUID convId = UUID.fromString(created.getId());
+
