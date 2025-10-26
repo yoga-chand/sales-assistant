@@ -1,2 +1,2 @@
-# sales-assistant
-AI Based Sales Assistant 
+# Secure Chatbot API Platform with Role-Based Access Control
+
