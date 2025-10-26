@@ -6,11 +6,10 @@ This project demonstrates the **backend architecture** for a secure, role-based 
 
 Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** for LLM interactions, it enforces **RBAC**, **ABAC**, and **audit logging**, achieving the target success metrics:
 
-| Metric                            | Target   | Achieved   |
-| --------------------------------- | -------- | ---------- |
-| Access violations prevented       | ≥ 99 %   | **99 %**   |
-| P95 latency (excluding async LLM) | < 500 ms | **460 ms** |
-| Audit logging coverage            | 100 %    | **100 %**  |
+| Metric                            | Target   | Achieved  |
+| --------------------------------- | -------- |-----------|
+| Access violations prevented       | ≥ 99 %   | **99 %**  |
+| Audit logging coverage            | 100 %    | **100 %** |
 
 ---
 
