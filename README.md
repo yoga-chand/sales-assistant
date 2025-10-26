@@ -14,9 +14,9 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
 
 ---
 
-## 2️⃣ Component Architecture
+## 2 Component Architecture
 
-```mermaid
+```
  ┌────────────────────────────────────────────────────────────┐
  │                     Client Applications                    │
  │  (Web / Mobile)                                            │
@@ -60,7 +60,7 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
 ```
 
 ---
-## 3️⃣ Core Use Cases
+## 3 Core Use Cases
 ```mermaid
 flowchart LR
 %% Actors
@@ -101,9 +101,9 @@ class uc_gen_report,uc_manage_providers future;
 ```
 ---
 
-## 4️⃣ Sequence Diagram (Chat Flow)
+## 4 Sequence Diagram (Chat Flow)
 
-```
+```mermaid
 sequenceDiagram
 autonumber
 participant U as User (Web/Mobile)
@@ -118,9 +118,9 @@ participant LA as LLM Adapter (OpenAI/Ollama)
 participant DB as PostgreSQL
 
 
-U->>G: POST /v1/conversations {title, content, includeCitations, topK}
+U->>G: POST /v1/conversations {title}
 G->>C: Forward (JWT/Guest resolved)
-C->>S: createAndComplete(title, metadata, content, flags)
+C->>S: createAndComplete(title)
 S->>DB: INSERT conversation
 S->>DB: CHECK duplicate user message
 alt not duplicate
@@ -143,9 +143,9 @@ S-->>C: {conversationId, answer, idempotencyKey, latency}
 C-->>U: 200 OK + JSON response
 ```
 ---
-```
 
-## 5️⃣ Design Highlights
+
+## 5 Design Highlights
 
 ### 🔐 **RBAC + ABAC**
 
@@ -178,7 +178,7 @@ C-->>U: 200 OK + JSON response
 CREATE TABLE IF NOT EXISTS conversations (
     id              UUID PRIMARY KEY,
     title           TEXT,
-    user_id   TEXT,                     -- null for guest users
+    user_id         TEXT,                     
     created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted         BOOLEAN NOT NULL DEFAULT FALSE
@@ -203,15 +203,14 @@ Indexes:
 CREATE INDEX IF NOT EXISTS idx_conversations_user_updated
     ON conversations(user_id, updated_at DESC);
 CREATE INDEX IF NOT EXISTS idx_msg_convo_id ON messages(conversation_id);
-CREATE INDEX IF NOT EXISTS idx_msg_created_at ON messages(created_at);
 CREATE INDEX IF NOT EXISTS idx_msg_role ON messages(role);
 ```
 
 ---
 
-## 6️⃣ Audit Logging & Security
+## 6 Audit Logging & Security
 
-* **`AuditLoggingFilter`** logs every request (`user, role, path, status, duration, ip`).
+* **`AuditLoggingFilter`** logs every request (`user, role, path, status, duration`).
 * **`LoggingAccessDeniedHandler` / LoggingAuthEntryPoint`** capture 401 / 403 events.
 * Logs written to both **console** and **`logs/audit.log`**:
 
@@ -222,26 +221,10 @@ CREATE INDEX IF NOT EXISTS idx_msg_role ON messages(role);
 
 This single log stream serves as evidence for **RBAC and audit-coverage metrics**.
 
----
-
-## 7️⃣ Performance Metric (P95 < 500 ms)
-
-* Measured via `curl -w` and Postman.
-* Excluded network/LLM latency.
-* 50 runs → P95 ≈ **460 ms**.
-
-| Percentile | Time (ms) | Note            |
-| ---------- | --------- | --------------- |
-| P50        | 210       | Median          |
-| P90        | 380       | –               |
-| **P95**    | **460**   | ✅ Within target |
-| P99        | 540       | Rare outlier    |
-
-Planned enhancement: **async task queue ( Redis + Spring @Async )** returning `202 Accepted` for long LLM jobs.
 
 ---
 
-## 8️⃣ Success Metrics Summary
+##  7 Success Metrics Summary
 
 | Metric                        | Target   | Achieved   | Validation Method                              |
 | ----------------------------- | -------- | ---------- | ---------------------------------------------- |
@@ -251,7 +234,7 @@ Planned enhancement: **async task queue ( Redis + Spring @Async )** returning `2
 
 ---
 
-## 🔜 10️⃣ Future Enhancements
+## 🔜 8 Future Enhancements
 
 * **Async LLM Pipeline** — Redis Queue + Worker Service for long running tasks
 * **Workflow Actions** — Report generation triggers
@@ -259,7 +242,7 @@ Planned enhancement: **async task queue ( Redis + Spring @Async )** returning `2
 
 ---
 
-## 📦 11️⃣ How to Run
+## 📦 9 How to Run
 
 ```bash
 # Build & run locally
@@ -276,7 +259,7 @@ Access endpoints:
 
 ---
 
-## 12️⃣ Appendix – Artifacts for Submission
+## 10 Appendix – Artifacts for Submission
 
 | Artifact           | Purpose                                         |
 | ------------------ | ----------------------------------------------- |
@@ -285,7 +268,7 @@ Access endpoints:
 | `kb.txt`           | Demo knowledge base (Apple Sales FY2023–FY2025) |
 | `tests/`           | JUnit suite (> 90 % coverage)                   |
 
-### Evidences:
+### 11 Evidences:
 
 #### Audit Logs 
 ![auditlogs.png](artifacts/auditlogs.png)
