@@ -143,7 +143,7 @@ S-->>C: {conversationId, answer, idempotencyKey, latency}
 C-->>U: 200 OK + JSON response
 ```
 ---
-```
+
 
 ## 5 Design Highlights
 
