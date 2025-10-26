@@ -1,4 +1,3 @@
-// com.apple.security.LoggingAuthenticationEntryPoint.java
 package com.apple.salesassistant.auth.handler;
 
 import jakarta.servlet.http.*;

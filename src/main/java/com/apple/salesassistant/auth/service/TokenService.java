@@ -5,12 +5,14 @@ import com.apple.salesassistant.auth.model.User;
 import com.apple.salesassistant.configuration.JwtProps;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Date;
 
+@Slf4j
 @Component
 public class TokenService {
 
@@ -26,6 +28,8 @@ public class TokenService {
         var scopes = RolePolicy.scopesForRoles(user.roles());
         Instant now = Instant.now();
         Instant exp = now.plusSeconds(props.expiresMinutes() * 60L);
+        log.info("Generating JWT for user {} with roles={} and scopes={}", user.email(),
+                user.roles(), scopes);
         return Jwts.builder()
                 .setIssuer(props.issuer())
                 .setSubject(user.id())

@@ -35,24 +35,20 @@ public class ConversationService {
     @Transactional
     public ConversationResult createConversation(String title) {
 
-        JwtAuthFilter.AuthUser authUser = currentAuthUser();
-
         var newConversation = createConversationEntity(title);
-
+        log.info("Created new conversation with id {}", newConversation.getId());
         // 2) Persist user message (optionally with idempotency)
         UUID userMessageUuid = insertUserMessage(newConversation.getId(), "");
-
+        log.info("Inserted user message with id {}");
         // 3) Invoke ABAC + LLM (ChatService already builds prompt & retrieves KB)
         long t0 = System.currentTimeMillis();
         Map<String,Object> llmResponse = chatService.answer(title); // returns {answer, role, citations[]}
         long latency = System.currentTimeMillis() - t0;
 
         String answer = Objects.toString(llmResponse.get("answer"), "");
-        @SuppressWarnings("unchecked")
-        List<Map<String,Object>> citesMap = (List<Map<String,Object>>) llmResponse.getOrDefault("citations", List.of());
-        Map<String, Object> citation = new HashMap<>();
-        citation.put("citations", citesMap);
+
         MessageEntity assistantMessageEntity = insertAssistantMessage(newConversation.getId(), userMessageUuid, latency, answer);
+        log.info("Inserted assistant message with id {}");
         return new ConversationResult(
                 newConversation.getId().toString(),
                 answer,
@@ -146,7 +142,7 @@ public class ConversationService {
         if (auth != null && auth.isAuthenticated() && auth.getPrincipal() instanceof JwtAuthFilter.AuthUser u) {
             return u;
         }
-        return null; // guest
+        return null;
     }
 
     private ConversationResult toResult(MessageEntity msg) {

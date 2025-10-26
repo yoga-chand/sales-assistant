@@ -2,15 +2,7 @@ package com.apple.salesassistant.chat.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
-import org.hibernate.type.SqlTypes;
-
 import java.time.Instant;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Entity
@@ -38,12 +30,6 @@ public class MessageEntity {
   @Column(columnDefinition = "uuid")
   private UUID replyToMessageId; // links assistant to prior user message
 
-
-
-//  @Column(columnDefinition = "jsonb")
-//  @JdbcTypeCode(SqlTypes.JSON)
-//  private Map<String, Object> citations;         // nullable; only on assistant messages
-
   @Column(name = "used_top_k")
   private Integer usedTopK;
 
@@ -68,8 +54,8 @@ public class MessageEntity {
   public void setRole(Role role) { this.role = role; }
   public String getContent() { return content; }
   public void setContent(String content) { this.content = content; }
-    public UUID getReplyToMessageId() { return replyToMessageId; }
-    public void setReplyToMessageId(UUID replyToMessageId) { this.replyToMessageId = replyToMessageId; }
+  public UUID getReplyToMessageId() { return replyToMessageId; }
+  public void setReplyToMessageId(UUID replyToMessageId) { this.replyToMessageId = replyToMessageId; }
   public Integer getUsedTopK() { return usedTopK; }
   public void setUsedTopK(Integer usedTopK) { this.usedTopK = usedTopK; }
   public Long getLatencyMs() { return latencyMs; }

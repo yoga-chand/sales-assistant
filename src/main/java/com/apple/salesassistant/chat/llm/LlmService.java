@@ -2,9 +2,7 @@ package com.apple.salesassistant.chat.llm;
 
 import com.apple.salesassistant.chat.kb.KbRetriever;
 import com.apple.salesassistant.chat.kb.KnowledgeBase;
-import com.apple.salesassistant.chat.llm.LlmProvider;
-import com.apple.salesassistant.chat.llm.LlmProviderSelector;
-import com.apple.salesassistant.chat.llm.SystemPromptLoader;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class LlmService {
     @Autowired
@@ -41,6 +40,7 @@ public class LlmService {
         );
 
         LlmProvider llmProvider = llmProviderSelector.select(Optional.empty());
+        log.info("Using LLM provider: %s".formatted(llmProvider.key()));
         return llmProvider.chat(messages);
 
     }

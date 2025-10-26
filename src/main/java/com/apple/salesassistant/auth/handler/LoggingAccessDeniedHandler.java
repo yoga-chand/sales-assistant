@@ -2,13 +2,10 @@ package com.apple.salesassistant.auth.handler;
 
 import jakarta.servlet.http.*;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
-import java.util.stream.Collectors;
 
 @Component
 @Slf4j

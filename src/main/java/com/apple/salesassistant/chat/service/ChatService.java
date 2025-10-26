@@ -7,6 +7,7 @@ import com.apple.salesassistant.chat.kb.KbChunk;
 import com.apple.salesassistant.chat.kb.KbPolicy;
 import com.apple.salesassistant.chat.kb.KbRetriever;
 import com.apple.salesassistant.chat.llm.LlmService;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -29,28 +30,19 @@ public class ChatService {
 
   /** Main entry from controller */
   public Map<String, Object> answer(String userQuestion) {
-    var principal = (JwtAuthFilter.AuthUser)
-        SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    UserContext userContext = getUserContext();
 
-    // Build ABAC user context (tenant/tags are placeholders you can wire later)
-    var auth = new UserContext(
-        principal.id(),
-        /* tenantId */ "t1",
-        Set.copyOf(principal.roles()),
-        Set.copyOf(principal.scopes()),
-        /* allowedTags */ Set.of() // e.g., Set.of("apac","services")
-    );
 
     // Candidate KB → ABAC filter → topK selection
     List<KbChunk> candidates = kb.all();
     List<KbChunk> allowed = candidates.stream()
-        .filter(c -> KbPolicy.canSee(auth, c))
+        .filter(c -> KbPolicy.canSee(userContext, c))
         .toList();
 
-    List<KbChunk> ctx = retriever.topK(userQuestion, allowed, auth);
+    List<KbChunk> ctx = retriever.topK(userQuestion, allowed, userContext);
 
     // Build role banner (non-authoritative, for assistant style only)
-    String roleBanner = banner(principal.roles());
+    String roleBanner = banner(userContext.roles().stream().toList());
     String prompt = buildPrompt(roleBanner, ctx, userQuestion);
 
     // Call the model (strategy pattern picks OpenAI or Ollama)
@@ -65,6 +57,32 @@ public class ChatService {
             "tags", c.tags()
         )).toList()
     );
+  }
+
+  private static UserContext getUserContext() {
+    var auth = SecurityContextHolder.getContext().getAuthentication();
+    UserContext userContext;
+    if (auth == null || !auth.isAuthenticated()
+            || auth instanceof AnonymousAuthenticationToken
+            || !(auth.getPrincipal() instanceof JwtAuthFilter.AuthUser u)) {
+      // Guest fallback
+      userContext = new UserContext(
+              "guest",
+              "t1",
+              Set.of("ROLE_GUEST"),
+              Set.of(),
+              Set.of() // e.g., allowedTags based on public policy
+      );
+    } else {
+      var principal = (JwtAuthFilter.AuthUser)auth.getPrincipal();
+      userContext = new UserContext(
+              principal.id(),
+              /* tenantId */ "t1",
+              Set.copyOf(principal.roles()),
+              Set.copyOf(principal.scopes()),
+              /* allowedTags */ Set.of());
+    }
+    return userContext;
   }
 
   private static String banner(List<String> roles) {

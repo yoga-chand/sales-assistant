@@ -2,12 +2,9 @@ package com.apple.salesassistant.chat.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Entity
@@ -22,11 +19,7 @@ public class ConversationEntity {
     private String title;
 
     @Column(name = "user_id")
-    private String userId;                 // null for guest
-
-//    @Column(columnDefinition = "jsonb")
-//    @Convert(converter = JsonConverters.MapJsonConverter.class)
-//    private Map<String, Object> metadata;
+    private String userId;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
@@ -52,8 +45,6 @@ public class ConversationEntity {
         this.updatedAt = Instant.now();
     }
 
-    // getters & setters …
-
     // convenience
     public UUID getId() {
         return id;
@@ -74,14 +65,6 @@ public class ConversationEntity {
     public void setUserId(String userId) {
         this.userId = userId;
     }
-
-//    public Map<String, Object> getMetadata() {
-//        return metadata;
-//    }
-//
-//    public void setMetadata(Map<String, Object> metadata) {
-//        this.metadata = metadata;
-//    }
 
     public Instant getCreatedAt() {
         return createdAt;
