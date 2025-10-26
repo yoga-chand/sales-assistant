@@ -103,7 +103,7 @@ class uc_gen_report,uc_manage_providers future;
 
 ## 4 Sequence Diagram (Chat Flow)
 
-```
+```mermaid
 sequenceDiagram
 autonumber
 participant U as User (Web/Mobile)
@@ -234,7 +234,7 @@ This single log stream serves as evidence for **RBAC and audit-coverage metrics*
 
 ---
 
-## 🔜 10 Future Enhancements
+## 🔜 8 Future Enhancements
 
 * **Async LLM Pipeline** — Redis Queue + Worker Service for long running tasks
 * **Workflow Actions** — Report generation triggers
@@ -242,7 +242,7 @@ This single log stream serves as evidence for **RBAC and audit-coverage metrics*
 
 ---
 
-## 📦 11 How to Run
+## 📦 9 How to Run
 
 ```bash
 # Build & run locally
@@ -259,7 +259,7 @@ Access endpoints:
 
 ---
 
-## 12️⃣ Appendix – Artifacts for Submission
+## 10 Appendix – Artifacts for Submission
 
 | Artifact           | Purpose                                         |
 | ------------------ | ----------------------------------------------- |
@@ -268,7 +268,7 @@ Access endpoints:
 | `kb.txt`           | Demo knowledge base (Apple Sales FY2023–FY2025) |
 | `tests/`           | JUnit suite (> 90 % coverage)                   |
 
-### Evidences:
+### 11 Evidences:
 
 #### Audit Logs 
 ![auditlogs.png](artifacts/auditlogs.png)
