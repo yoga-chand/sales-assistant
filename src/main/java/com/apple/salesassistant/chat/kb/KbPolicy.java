@@ -1,4 +1,3 @@
-// com.apple.kb.KbPolicy.java
 package com.apple.salesassistant.chat.kb;
 
 

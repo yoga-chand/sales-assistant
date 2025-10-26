@@ -1,7 +1,5 @@
-// com.apple.security.RolePolicy.java
 package com.apple.salesassistant.auth.util;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 

@@ -1,5 +1,6 @@
 package com.apple.salesassistant.chat.llm;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 public class SystemPromptLoader {
 
@@ -34,6 +36,7 @@ public class SystemPromptLoader {
                     new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8))) {
                 cachedPrompt = reader.lines().collect(Collectors.joining("\n"));
             }
+            log.info("Loaded system prompt from " + location);
             return cachedPrompt;
         } catch (Exception e) {
             throw new RuntimeException("Failed to load system prompt from " + location, e);

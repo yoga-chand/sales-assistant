@@ -1,4 +1,3 @@
-// com.apple.kb.KbChunk.java
 package com.apple.salesassistant.chat.kb;
 
 import java.util.Set;

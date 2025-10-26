@@ -3,6 +3,7 @@ package com.apple.salesassistant.chat.llm;
 import com.apple.salesassistant.configuration.OllamaConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class OllamaProvider implements LlmProvider {
 
@@ -27,7 +29,7 @@ public class OllamaProvider implements LlmProvider {
     @Override
     public String chat(List<Map<String, String>> messages) {
         Map<String, Object> body = Map.of(
-                "model", ollamaConfig.model(),                    // e.g., "gpt-4o-mini"
+                "model", ollamaConfig.model(),
                 "messages", messages,
                 "temperature", 0.2
         );
@@ -44,6 +46,7 @@ public class OllamaProvider implements LlmProvider {
                     entity,
                     String.class
             );
+            log.info("Ollama response status: " + response.getStatusCode());
             return parseResponse(response);
         }
         catch (Exception e) {
@@ -81,7 +84,6 @@ public class OllamaProvider implements LlmProvider {
         } catch (IOException e) {
             throw new RuntimeException("Error parsing NDJSON response", e);
         }
-
         return result.toString();
     }
 

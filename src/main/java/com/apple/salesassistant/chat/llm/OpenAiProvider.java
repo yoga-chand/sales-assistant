@@ -2,6 +2,7 @@ package com.apple.salesassistant.chat.llm;
 
 import com.apple.salesassistant.configuration.OpenAiConfig;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @AllArgsConstructor
 @Component
 public class OpenAiProvider implements  LlmProvider {
@@ -29,7 +31,7 @@ public class OpenAiProvider implements  LlmProvider {
         headers.setBearerAuth(openAiConfig.apiKey());
 
         Map<String, Object> body = Map.of(
-                "model", openAiConfig.model(),                    // e.g., "gpt-4o-mini"
+                "model", openAiConfig.model(),
                 "messages", messages,
                 "temperature", 0.2
         );
@@ -43,7 +45,7 @@ public class OpenAiProvider implements  LlmProvider {
             );
             Map<String, Object> m = resp.getBody();
             if (m == null) throw new IllegalStateException("Empty OpenAI response");
-
+            log.info("OpenAI api response successful");
             Object choices = m.get("choices");
             if (choices instanceof List<?> list && !list.isEmpty()) {
                 Object first = list.get(0);

@@ -20,7 +20,6 @@ public class AuthController {
     this.authService = authService;
   }
 
-  // DTOs (request/response)
   public record LoginRequest(
           @NotBlank @Email String email,
           @NotBlank String password
@@ -30,8 +29,8 @@ public class AuthController {
           String userId,
           String email,
           java.util.List<String> roles,
-          String accessToken,           // JWT
-          String tokenType,             // "Bearer"
+          String accessToken,
+          String tokenType,
           long   expiresInSeconds
   ) {}
 

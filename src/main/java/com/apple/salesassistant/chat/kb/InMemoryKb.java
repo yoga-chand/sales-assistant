@@ -1,6 +1,7 @@
 package com.apple.salesassistant.chat.kb;
 
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.regex.Pattern;
 
+@Slf4j
 @Component
 public class InMemoryKb {
 
@@ -25,7 +27,7 @@ public class InMemoryKb {
 
   @PostConstruct
   public void load() throws Exception {
-    String all = readAll();                          // <— here’s readAll()
+    String all = readAll();
     List<Section> sections = splitByHeadings(all);
     List<KbChunk> out = new ArrayList<>();
     int seq = 0;
@@ -48,14 +50,13 @@ public class InMemoryKb {
         ));
       }
     }
+    log.info("Loaded %d KB chunks from %s".formatted(out.size(), path));
     this.chunks = List.copyOf(out);
   }
 
   public List<KbChunk> all() { return chunks; }
 
-  // ----- helpers -----
-
-  private String readAll() throws Exception {        // <— loads file from classpath or absolute path
+  private String readAll() throws Exception {
     Resource r = loader.getResource(path);
     if (!r.exists()) throw new IllegalStateException("KB not found: " + path);
     try (var in = r.getInputStream()) {

@@ -29,7 +29,6 @@ public class KbRetriever {
             .collect(Collectors.toList());
   }
 
-  // --- simple lexical scoring ---
 
   private static final Set<String> STOP = Set.of(
           "the","a","an","and","or","of","for","to","in","on","by","is","are","was","were","with","at","as","from","that","this","it"

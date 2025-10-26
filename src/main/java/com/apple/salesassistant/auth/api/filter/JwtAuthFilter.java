@@ -1,10 +1,10 @@
-// com.apple.security.JwtAuthFilter.java
 package com.apple.salesassistant.auth.api.filter;
 
 import com.apple.salesassistant.auth.service.TokenService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Set;
-import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 public class JwtAuthFilter extends OncePerRequestFilter {
   private final TokenService tokens;
@@ -42,7 +42,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         var auth = new UsernamePasswordAuthenticationToken(principal, null, auths);
         SecurityContextHolder.getContext().setAuthentication(auth);
       } catch (Exception e) {
-        // invalid token → ignore; request remains unauthenticated
+        log.error("JWT auth failed: {}", e.getMessage());
       }
     }
     chain.doFilter(req, res);
