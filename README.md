@@ -54,7 +54,7 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
  ┌────────────────────────────────────────────────────────────┐
  │                  Persistence Layer (PostgreSQL)            │
  │    Conversations                                           │
- │    Messages (assistant/user content + citations JSONB)     │
+ │    Messages (assistant/user content )     │
  │    Operations (async future extension)                     │
  └────────────────────────────────────────────────────────────┘
 ```
@@ -134,7 +134,7 @@ GC->>PR: get(activeProvider)
 PR-->>GC: provider
 GC->>LA: chat(systemPrompt + CONTEXT, user)
 LA-->>GC: answer
-GC-->>S: {answer, citations}
+GC-->>S: {answer}
 S->>DB: INSERT assistant message (idempotencyKey)
 else duplicate
 S->>DB: SELECT last assistant
@@ -155,7 +155,7 @@ info:
     Secure Chatbot API Platform — Sales-Assistant
     - JWT-based auth with RBAC (ADMIN, ANALYST, GUEST)
     - Guest chat without history
-    - Conversations and messages with citations
+    - Conversations and messages 
 
 servers:
   - url: http://localhost:8080/v1
@@ -353,7 +353,7 @@ paths:
               message: "How many units sold"
       responses:
         '200':
-          description: Assistant reply with optional citations
+          description: Assistant reply 
           content:
             application/json:
               schema:
@@ -536,12 +536,6 @@ components:
       type: object
       properties:
         message: { type: string }
-        includeCitations:
-          type: boolean
-          default: false
-        topK:
-          type: integer
-          default: 3
       required: [message]
 
     GuestCompleteResponse:
