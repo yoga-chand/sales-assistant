@@ -19,15 +19,15 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
 ```mermaid
  ┌────────────────────────────────────────────────────────────┐
  │                     Client Applications                    │
- │  (Web / Mobile)                            │
+ │  (Web / Mobile)                                            │
  └────────────────────────────────────────────────────────────┘
                  │
                  ▼
  ┌────────────────────────────────────────────────────────────┐
  │                    API Gateway Layer                       │
  │  • JWT Authentication / Guest Access                       │
- │  • RBAC Enforcement (ROLE_ADMIN, ROLE_ANALYST, ROLE_GUEST)  │
- │  • Global Audit Logging (100 % coverage)                    │
+ │  • RBAC Enforcement (ROLE_ADMIN, ROLE_ANALYST, ROLE_GUEST) │
+ │  • Global Audit Logging (100 % coverage)                   │
  └────────────────────────────────────────────────────────────┘
                  │
                  ▼
@@ -46,16 +46,16 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
                  ▼
  ┌────────────────────────────────────────────────────────────┐
  │                    External AI Providers                   │
- │  • OpenAI (gpt-4o-mini)                                   │
+ │  • OpenAI (gpt-4o-mini)                                    │
  │  • Ollama (llama3.2:latest local model)                    │
  └────────────────────────────────────────────────────────────┘
                  │
                  ▼
  ┌────────────────────────────────────────────────────────────┐
- │                  Persistence Layer (PostgreSQL)             │
- │  • Conversations                                            │
- │  • Messages (assistant/user content + citations JSONB)      │
- │  • Operations (async future extension)                      │
+ │                  Persistence Layer (PostgreSQL)            │
+ │  • Conversations                                           │
+ │  • Messages (assistant/user content + citations JSONB)     │
+ │  • Operations (async future extension)                     │
  └────────────────────────────────────────────────────────────┘
 
 ```
