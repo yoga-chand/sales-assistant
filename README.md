@@ -15,7 +15,7 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
 ---
 
 ## 2️⃣ Component Architecture
----
+
 ```mermaid
  ┌────────────────────────────────────────────────────────────┐
  │                     Client Applications                    │
