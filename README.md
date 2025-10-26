@@ -60,6 +60,24 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
 
 ```
 
+flowchart TD
+A[Client Applications (Web / Mobile)] --> B[API Gateway Layer
+- JWT Authentication / Guest Access
+- RBAC Enforcement (ADMIN, ANALYST, GUEST)
+- Global Audit Logging]
+  B --> C[Sales-Assistant Service (Spring Boot Microservice)]
+  C --> C1[Auth & RBAC (Spring Security + JWT)]
+  C --> C2[Conversation & Message Management (JPA + PostgreSQL)]
+  C --> C3[Knowledge Base (Chunked KB + ABAC Policy)]
+  C --> C4[LLM Provider Strategy (OpenAI / Ollama)]
+  C --> C5[Audit Logging & Metrics]
+  C --> D[External AI Providers
+- OpenAI (gpt-4o-mini)
+- Ollama (llama3.2:latest)]
+  C --> E[Persistence Layer (PostgreSQL)
+- Conversations
+- Messages (assistant/user content + citations JSONB)
+- Operations (async future extension)]
 ---
 
 ## 3️⃣ Core Use Cases
