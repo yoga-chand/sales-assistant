@@ -32,3 +32,4 @@
 2025-10-26 12:16:46.418 INFO  [http-nio-8080-exec-10] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=AuthUser[id=u2, email=analyst@demo, roles=[ROLE_ANALYST], scopes=[kb:read:detail, chat:invoke, conv:read, conv:write]] method=POST uri=/v1/conversations status=200 duration=5467ms
 2025-10-26 12:17:43.533 INFO  [http-nio-8080-exec-2] c.a.s.chat.service.MessageService - [replyToMessage] Completed requestId=a2bf01a0-0ef6-4fa6-afdf-8bdf25ce2299 latency=2396ms
 2025-10-26 12:17:43.537 INFO  [http-nio-8080-exec-2] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=anonymous method=POST uri=/v1/messages:complete status=200 duration=2401ms
+2025-10-26 12:56:57.125 INFO  [http-nio-8080-exec-4] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=AuthUser[id=u2, email=analyst@demo, roles=[ROLE_ANALYST], scopes=[kb:read:detail, chat:invoke, conv:read, conv:write]] method=POST uri=/v1/conversations/00fa17ff-a850-4574-9fe5-d364e50005b9/messages status=200 duration=2597ms
