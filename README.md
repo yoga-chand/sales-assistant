@@ -14,9 +14,9 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
 
 ---
 
-## 2️⃣ Component Architecture
+## 2 Component Architecture
 
-```mermaid
+```
  ┌────────────────────────────────────────────────────────────┐
  │                     Client Applications                    │
  │  (Web / Mobile)                                            │
@@ -60,7 +60,7 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
 ```
 
 ---
-## 3️⃣ Core Use Cases
+## 3 Core Use Cases
 ```mermaid
 flowchart LR
 %% Actors
@@ -101,7 +101,7 @@ class uc_gen_report,uc_manage_providers future;
 ```
 ---
 
-## 4️⃣ Sequence Diagram (Chat Flow)
+## 4 Sequence Diagram (Chat Flow)
 
 ```
 sequenceDiagram
@@ -145,7 +145,7 @@ C-->>U: 200 OK + JSON response
 ---
 ```
 
-## 5️⃣ Design Highlights
+## 5 Design Highlights
 
 ### 🔐 **RBAC + ABAC**
 
@@ -208,7 +208,7 @@ CREATE INDEX IF NOT EXISTS idx_msg_role ON messages(role);
 
 ---
 
-## 6️⃣ Audit Logging & Security
+## 6 Audit Logging & Security
 
 * **`AuditLoggingFilter`** logs every request (`user, role, path, status, duration`).
 * **`LoggingAccessDeniedHandler` / LoggingAuthEntryPoint`** capture 401 / 403 events.
@@ -224,7 +224,7 @@ This single log stream serves as evidence for **RBAC and audit-coverage metrics*
 
 ---
 
-## 8️⃣ Success Metrics Summary
+##  7 Success Metrics Summary
 
 | Metric                        | Target   | Achieved   | Validation Method                              |
 | ----------------------------- | -------- | ---------- | ---------------------------------------------- |
@@ -234,7 +234,7 @@ This single log stream serves as evidence for **RBAC and audit-coverage metrics*
 
 ---
 
-## 🔜 10️⃣ Future Enhancements
+## 🔜 10 Future Enhancements
 
 * **Async LLM Pipeline** — Redis Queue + Worker Service for long running tasks
 * **Workflow Actions** — Report generation triggers
@@ -242,7 +242,7 @@ This single log stream serves as evidence for **RBAC and audit-coverage metrics*
 
 ---
 
-## 📦 11️⃣ How to Run
+## 📦 11 How to Run
 
 ```bash
 # Build & run locally
