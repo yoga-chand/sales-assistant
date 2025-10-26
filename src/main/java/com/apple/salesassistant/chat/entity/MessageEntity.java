@@ -35,6 +35,10 @@ public class MessageEntity {
   @Column(columnDefinition = "text", nullable = false)
   private String content;
 
+  @Column(columnDefinition = "uuid")
+  private UUID replyToMessageId; // links assistant to prior user message
+
+
 
 //  @Column(columnDefinition = "jsonb")
 //  @JdbcTypeCode(SqlTypes.JSON)
@@ -64,8 +68,8 @@ public class MessageEntity {
   public void setRole(Role role) { this.role = role; }
   public String getContent() { return content; }
   public void setContent(String content) { this.content = content; }
-//  public Map<String, Object> getCitations() { return citations; }
-//  public void setCitations(Map<String, Object> citations) { this.citations = citations; }
+    public UUID getReplyToMessageId() { return replyToMessageId; }
+    public void setReplyToMessageId(UUID replyToMessageId) { this.replyToMessageId = replyToMessageId; }
   public Integer getUsedTopK() { return usedTopK; }
   public void setUsedTopK(Integer usedTopK) { this.usedTopK = usedTopK; }
   public Long getLatencyMs() { return latencyMs; }
