@@ -1,6 +1,6 @@
-# 🧠 Secure Chatbot API Platform — Case Study (Sales-Assistant)
+# Secure Chatbot API Platform — Case Study (Sales-Assistant)
 
-## 1️⃣ Overview
+## 1 Overview
 
 This project demonstrates the **backend architecture** for a secure, role-based **AI chatbot platform** that enables enterprise users to query sales data, generate summaries, and trigger workflow actions.
 
@@ -562,7 +562,7 @@ components:
 
 ## 6 Design Highlights
 
-### 🔐 **RBAC + ABAC**
+###  **RBAC + ABAC**
 
 * **RBAC** via Spring Security and JWT:
 
@@ -572,7 +572,7 @@ components:
     * Chunks tagged by region/product (e.g. `apac`, `iphone`)
     * `KbPolicy` filters context based on user roles/tags
 
-### ⚙️ **LLM Provider Strategy**
+### ⚙ **LLM Provider Strategy**
 
 * **Strategy Pattern** selects provider:
 
@@ -581,13 +581,13 @@ components:
 * Configurable in `application.yml`
 * Both adapters tested with `MockRestServiceServer`
 
-### 🧩 **Knowledge Base**
+###  **Knowledge Base**
 
 * Simple text KB (`kb.txt`) chunked by section headers.
 * Indexed in memory with metadata (tags, title).
 * Supports top-K retrieval and citation return.
 
-### 🧮 **Persistence Schema**
+###  **Persistence Schema**
 
 ```sql
 CREATE TABLE IF NOT EXISTS conversations (
@@ -649,7 +649,7 @@ This single log stream serves as evidence for **RBAC and audit-coverage metrics*
 
 ---
 
-## 🔜 9 Future Enhancements
+##  9 Future Enhancements
 
 * **Async LLM Pipeline** — Redis Queue + Worker Service for long running tasks
 * **Workflow Actions** — Report generation triggers
@@ -657,7 +657,7 @@ This single log stream serves as evidence for **RBAC and audit-coverage metrics*
 
 ---
 
-## 📦 10 How to Run
+##  10 How to Run
 
 ```bash
 # Build & run locally
