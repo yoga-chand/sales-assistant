@@ -25,9 +25,9 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
                  ▼
  ┌────────────────────────────────────────────────────────────┐
  │                    API Gateway Layer                       │
- │  • JWT Authentication / Guest Access                       │
- │  • RBAC Enforcement (ROLE_ADMIN, ROLE_ANALYST, ROLE_GUEST) │
- │  • Global Audit Logging (100 % coverage)                   │
+ │   JWT Authentication / Guest Access                        │
+ │   RBAC Enforcement (ROLE_ADMIN, ROLE_ANALYST, ROLE_GUEST)  │
+ │   Global Audit Logging (100 % coverage)                    │
  └────────────────────────────────────────────────────────────┘
                  │
                  ▼
@@ -36,26 +36,26 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
  │  (Single Spring Boot microservice)                         │
  │                                                            │
  │  Modules:                                                  │
- │  • Auth & RBAC (Spring Security + JWT)                     │
- │  • Conversation / Message Management (JPA + PostgreSQL)    │
- │  • Knowledge Base (chunked text KB + ABAC policy)          │
- │  • LLM Provider Strategy (OpenAI / Ollama)                 │
- │  • Audit Logging & Metrics                                 │
+ │   Auth & RBAC (Spring Security + JWT)                      │
+ │   Conversation / Message Management (JPA + PostgreSQL)     │
+ │   Knowledge Base (chunked text KB + ABAC policy)           │
+ │   LLM Provider Strategy (OpenAI / Ollama)                  │ 
+ │   Audit Logging & Metrics                                  │
  └────────────────────────────────────────────────────────────┘
                  │
                  ▼
  ┌────────────────────────────────────────────────────────────┐
  │                    External AI Providers                   │
- │  • OpenAI (gpt-4o-mini)                                    │
- │  • Ollama (llama3.2:latest local model)                    │
+ │    OpenAI (gpt-4o-mini)                                    │
+ │    Ollama (llama3.2:latest local model)                    │
  └────────────────────────────────────────────────────────────┘
                  │
                  ▼
  ┌────────────────────────────────────────────────────────────┐
  │                  Persistence Layer (PostgreSQL)            │
- │  • Conversations                                           │
- │  • Messages (assistant/user content + citations JSONB)     │
- │  • Operations (async future extension)                     │
+ │    Conversations                                           │
+ │    Messages (assistant/user content + citations JSONB)     │
+ │    Operations (async future extension)                     │
  └────────────────────────────────────────────────────────────┘
 ```
 
