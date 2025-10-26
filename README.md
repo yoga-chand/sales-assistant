@@ -179,7 +179,6 @@ CREATE TABLE IF NOT EXISTS conversations (
     id              UUID PRIMARY KEY,
     title           TEXT,
     user_id   TEXT,                     -- null for guest users
-  
     created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted         BOOLEAN NOT NULL DEFAULT FALSE
@@ -203,9 +202,9 @@ Indexes:
 ```sql
 CREATE INDEX IF NOT EXISTS idx_conversations_user_updated
     ON conversations(user_id, updated_at DESC);
-CREATE INDEX idx_msg_convo_id ON messages(conversation_id);
-CREATE INDEX idx_msg_created_at ON messages(created_at);
-CREATE INDEX idx_msg_role ON messages(role);
+CREATE INDEX IF NOT EXISTS idx_msg_convo_id ON messages(conversation_id);
+CREATE INDEX IF NOT EXISTS idx_msg_created_at ON messages(created_at);
+CREATE INDEX IF NOT EXISTS idx_msg_role ON messages(role);
 ```
 
 ---
@@ -283,7 +282,6 @@ Access endpoints:
 | ------------------ | ----------------------------------------------- |
 | `README.md`        | Architecture & metrics summary                  |
 | `logs/audit.log`   | Evidence for RBAC & audit coverage              |
-| `perf_metrics.txt` | 50-request latency sample                       |
 | `kb.txt`           | Demo knowledge base (Apple Sales FY2023–FY2025) |
 | `tests/`           | JUnit suite (> 90 % coverage)                   |
 
