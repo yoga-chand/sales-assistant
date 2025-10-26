@@ -21,20 +21,7 @@ services:
       timeout: 3s
       retries: 20
 
-#  redis:
-#    image: redis:7-alpine
-#    container_name: sales-assistant-redis
-#    command: ["redis-server", "--appendonly", "yes"]  # durable queue + rate limit storage
-#    ports:
-#      - "6379:6379"
-#    volumes:
-#      - redisdata:/data
-#    healthcheck:
-#      test: ["CMD", "redis-cli", "PING"]
-#      interval: 5s
-#      timeout: 3s
-#      retries: 20
-#
+
 #  ollama:
 #    image: ollama/ollama:latest
 #    container_name: sales-assistant-ollama
@@ -47,49 +34,8 @@ services:
 #      interval: 10s
 #      timeout: 5s
 #      retries: 20
-#
-#  sales-assistant:
-#    # For local dev you can either build from your Dockerfile or mount your code.
-#    # Option A: build an image (recommended)
-#    build:
-#      context: ./sales-assistant
-#      dockerfile: Dockerfile
-#    # Option B: if you want to mount source for rapid edit/run, uncomment volumes and set your entrypoint accordingly.
-#    container_name: sales-assistant-app
-#    ports:
-#      - "8080:8080"
-#    environment:
-#      # Spring Boot basics
-#      SPRING_PROFILES_ACTIVE: dev
-#      SERVER_PORT: 8080
-#
-#      # Postgres (JPA)
-#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sales_assistant
-#      SPRING_DATASOURCE_USERNAME: sa_user
-#      SPRING_DATASOURCE_PASSWORD: sa_pass
-#      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
-#
-#      # Redis (rate limit / queues later)
-#      SPRING_DATA_REDIS_HOST: redis
-#      SPRING_DATA_REDIS_PORT: 6379
-#
-#      # Ollama (LLM)
-#      OLLAMA_BASE_URL: http://ollama:11434
-#      OLLAMA_MODEL: llama3.1  # tweak as you like (e.g., qwen2.5:7b)
-#
-#      # (optional) Java opts
-#      JAVA_TOOL_OPTIONS: "-Xms256m -Xmx768m"
-#    depends_on:
-#      postgres:
-#        condition: service_healthy
-#      redis:
-#        condition: service_healthy
-#      ollama:
-#        condition: service_healthy
-#    # volumes:
-#    #   - ./sales-assistant:/app   # if you prefer source mounts for dev
+
 
 volumes:
   pgdata:
-#  redisdata:
-#  ollama:
+
