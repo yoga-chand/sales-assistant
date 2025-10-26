@@ -1,0 +1,34 @@
+2025-10-26 10:56:50.784 INFO  [main] c.apple.salesassistant.Application - The following 1 profile is active: "db"
+2025-10-26 10:56:55.333 INFO  [main] c.apple.salesassistant.Application - Started Application in 4.874 seconds (process running for 5.075)
+2025-10-26 10:57:10.431 INFO  [http-nio-8080-exec-1] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=AuthUser[id=u3, email=admin@demo, roles=[ROLE_ADMIN], scopes=[kb:read:detail, audit:read, chat:invoke, conv:read, conv:write, admin:model:set, conv:read:any]] method=POST uri=/v1/conversations status=200 duration=6436ms
+2025-10-26 10:58:14.102 INFO  [http-nio-8080-exec-5] c.a.s.a.h.LoggingAuthenticationEntryPoint - Unauthorized access attempt detected path=/v1/conversations/00fa17ff-a850-4574-9fe5-d364e50005b9 reason=Full authentication is required to access this resource
+
+2025-10-26 10:59:03.410 INFO  [http-nio-8080-exec-6] c.a.s.chat.service.MessageService - [replyToMessage] Completed requestId=10d4bd56-34ae-4694-9cb4-97cad915cc85 latency=1684ms
+2025-10-26 10:59:03.412 INFO  [http-nio-8080-exec-6] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=anonymous method=POST uri=/v1/messages:complete status=200 duration=1694ms
+2025-10-26 10:59:30.389 INFO  [http-nio-8080-exec-7] c.a.s.chat.service.MessageService - [replyToMessage] Completed requestId=83b7f531-eab2-4613-98c8-f8f5c72d4115 latency=5120ms
+2025-10-26 10:59:30.392 INFO  [http-nio-8080-exec-7] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=AuthUser[id=u3, email=admin@demo, roles=[ROLE_ADMIN], scopes=[kb:read:detail, audit:read, chat:invoke, conv:read, conv:write, admin:model:set, conv:read:any]] method=POST uri=/v1/messages:complete status=200 duration=5124ms
+2025-10-26 10:59:58.016 ERROR [http-nio-8080-exec-8] c.a.s.auth.api.filter.JwtAuthFilter - JWT auth failed: JWT expired at 2025-10-26T01:38:36Z. Current time: 2025-10-26T02:59:58Z, a difference of 4882015 milliseconds.  Allowed clock skew: 0 milliseconds.
+2025-10-26 10:59:58.018 INFO  [http-nio-8080-exec-8] c.a.s.a.h.LoggingAuthenticationEntryPoint - Unauthorized access attempt detected path=/v1/conversations/00fa17ff-a850-4574-9fe5-d364e50005b9 reason=Full authentication is required to access this resource
+
+2025-10-26 11:00:00.020 ERROR [http-nio-8080-exec-9] c.a.s.auth.api.filter.JwtAuthFilter - JWT auth failed: JWT expired at 2025-10-26T01:38:36Z. Current time: 2025-10-26T03:00:00Z, a difference of 4884019 milliseconds.  Allowed clock skew: 0 milliseconds.
+2025-10-26 11:00:00.022 INFO  [http-nio-8080-exec-9] c.a.s.a.h.LoggingAuthenticationEntryPoint - Unauthorized access attempt detected path=/v1/conversations/00fa17ff-a850-4574-9fe5-d364e50005b9 reason=Full authentication is required to access this resource
+
+2025-10-26 11:00:12.042 INFO  [http-nio-8080-exec-10] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=AuthUser[id=u3, email=admin@demo, roles=[ROLE_ADMIN], scopes=[kb:read:detail, audit:read, chat:invoke, conv:read, conv:write, admin:model:set, conv:read:any]] method=GET uri=/v1/conversations/00fa17ff-a850-4574-9fe5-d364e50005b9 status=200 duration=34ms
+2025-10-26 11:00:22.066 INFO  [http-nio-8080-exec-2] c.a.s.a.h.LoggingAuthenticationEntryPoint - Unauthorized access attempt detected path=/v1/conversations/00fa17ff-a850-4574-9fe5-d364e50005b9/messages reason=Full authentication is required to access this resource
+
+2025-10-26 11:00:33.506 INFO  [http-nio-8080-exec-1] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=AuthUser[id=u3, email=admin@demo, roles=[ROLE_ADMIN], scopes=[kb:read:detail, audit:read, chat:invoke, conv:read, conv:write, admin:model:set, conv:read:any]] method=GET uri=/v1/conversations/00fa17ff-a850-4574-9fe5-d364e50005b9/messages status=200 duration=75ms
+2025-10-26 11:01:37.348 INFO  [http-nio-8080-exec-5] c.a.s.auth.service.AuthService - Authenticating user with email: analyst@demo
+2025-10-26 11:01:37.434 INFO  [http-nio-8080-exec-5] c.a.s.auth.service.AuthService - User analyst@demo authenticated successfully
+2025-10-26 11:01:37.435 INFO  [http-nio-8080-exec-5] c.a.s.auth.service.TokenService - Generating JWT for user analyst@demo with roles=[ROLE_ANALYST] and scopes=[kb:read:detail, chat:invoke, conv:read, conv:write]
+2025-10-26 11:01:37.443 INFO  [http-nio-8080-exec-5] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=anonymous method=POST uri=/v1/auth/login status=200 duration=103ms
+
+2025-10-26 12:16:22.793 ERROR [http-nio-8080-exec-8] c.a.s.auth.api.filter.JwtAuthFilter - JWT auth failed: JWT strings must contain exactly 2 period characters. Found: 1
+2025-10-26 12:16:22.798 INFO  [http-nio-8080-exec-8] c.a.s.a.h.LoggingAuthenticationEntryPoint - Unauthorized access attempt detected path=/v1/conversations reason=Full authentication is required to access this resource
+
+2025-10-26 12:16:25.741 INFO  [http-nio-8080-exec-9] c.a.s.auth.service.AuthService - Authenticating user with email: analyst@demo
+2025-10-26 12:16:25.845 INFO  [http-nio-8080-exec-9] c.a.s.auth.service.AuthService - User analyst@demo authenticated successfully
+2025-10-26 12:16:25.845 INFO  [http-nio-8080-exec-9] c.a.s.auth.service.TokenService - Generating JWT for user analyst@demo with roles=[ROLE_ANALYST] and scopes=[kb:read:detail, chat:invoke, conv:read, conv:write]
+2025-10-26 12:16:25.847 INFO  [http-nio-8080-exec-9] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=anonymous method=POST uri=/v1/auth/login status=200 duration=110ms
+2025-10-26 12:16:46.418 INFO  [http-nio-8080-exec-10] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=AuthUser[id=u2, email=analyst@demo, roles=[ROLE_ANALYST], scopes=[kb:read:detail, chat:invoke, conv:read, conv:write]] method=POST uri=/v1/conversations status=200 duration=5467ms
+2025-10-26 12:17:43.533 INFO  [http-nio-8080-exec-2] c.a.s.chat.service.MessageService - [replyToMessage] Completed requestId=a2bf01a0-0ef6-4fa6-afdf-8bdf25ce2299 latency=2396ms
+2025-10-26 12:17:43.537 INFO  [http-nio-8080-exec-2] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=anonymous method=POST uri=/v1/messages:complete status=200 duration=2401ms
