@@ -118,9 +118,9 @@ participant LA as LLM Adapter (OpenAI/Ollama)
 participant DB as PostgreSQL
 
 
-U->>G: POST /v1/conversations {title, content, includeCitations, topK}
+U->>G: POST /v1/conversations {title}
 G->>C: Forward (JWT/Guest resolved)
-C->>S: createAndComplete(title, metadata, content, flags)
+C->>S: createAndComplete(title)
 S->>DB: INSERT conversation
 S->>DB: CHECK duplicate user message
 alt not duplicate
@@ -203,7 +203,6 @@ Indexes:
 CREATE INDEX IF NOT EXISTS idx_conversations_user_updated
     ON conversations(user_id, updated_at DESC);
 CREATE INDEX IF NOT EXISTS idx_msg_convo_id ON messages(conversation_id);
-CREATE INDEX IF NOT EXISTS idx_msg_created_at ON messages(created_at);
 CREATE INDEX IF NOT EXISTS idx_msg_role ON messages(role);
 ```
 
@@ -211,7 +210,7 @@ CREATE INDEX IF NOT EXISTS idx_msg_role ON messages(role);
 
 ## 6️⃣ Audit Logging & Security
 
-* **`AuditLoggingFilter`** logs every request (`user, role, path, status, duration, ip`).
+* **`AuditLoggingFilter`** logs every request (`user, role, path, status, duration`).
 * **`LoggingAccessDeniedHandler` / LoggingAuthEntryPoint`** capture 401 / 403 events.
 * Logs written to both **console** and **`logs/audit.log`**:
 
@@ -222,22 +221,6 @@ CREATE INDEX IF NOT EXISTS idx_msg_role ON messages(role);
 
 This single log stream serves as evidence for **RBAC and audit-coverage metrics**.
 
----
-
-## 7️⃣ Performance Metric (P95 < 500 ms)
-
-* Measured via `curl -w` and Postman.
-* Excluded network/LLM latency.
-* 50 runs → P95 ≈ **460 ms**.
-
-| Percentile | Time (ms) | Note            |
-| ---------- | --------- | --------------- |
-| P50        | 210       | Median          |
-| P90        | 380       | –               |
-| **P95**    | **460**   | ✅ Within target |
-| P99        | 540       | Rare outlier    |
-
-Planned enhancement: **async task queue ( Redis + Spring @Async )** returning `202 Accepted` for long LLM jobs.
 
 ---
 
