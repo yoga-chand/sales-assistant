@@ -57,29 +57,9 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
  │  • Messages (assistant/user content + citations JSONB)     │
  │  • Operations (async future extension)                     │
  └────────────────────────────────────────────────────────────┘
-
 ```
 
-flowchart TD
-A[Client Applications (Web / Mobile)] --> B[API Gateway Layer
-- JWT Authentication / Guest Access
-- RBAC Enforcement (ADMIN, ANALYST, GUEST)
-- Global Audit Logging]
-  B --> C[Sales-Assistant Service (Spring Boot Microservice)]
-  C --> C1[Auth & RBAC (Spring Security + JWT)]
-  C --> C2[Conversation & Message Management (JPA + PostgreSQL)]
-  C --> C3[Knowledge Base (Chunked KB + ABAC Policy)]
-  C --> C4[LLM Provider Strategy (OpenAI / Ollama)]
-  C --> C5[Audit Logging & Metrics]
-  C --> D[External AI Providers
-- OpenAI (gpt-4o-mini)
-- Ollama (llama3.2:latest)]
-  C --> E[Persistence Layer (PostgreSQL)
-- Conversations
-- Messages (assistant/user content + citations JSONB)
-- Operations (async future extension)]
 ---
-
 ## 3️⃣ Core Use Cases
 ```mermaid
 flowchart LR
@@ -118,6 +98,7 @@ actor_admin --- uc_manage_rbac
 %% Notes
 classDef future fill:#f5f5f5,stroke:#bbb,color:#555,stroke-dasharray: 3 3;
 class uc_gen_report,uc_manage_providers future;
+```
 ---
 
 ## 4️⃣ Sequence Diagram (Chat Flow)
@@ -161,8 +142,8 @@ end
 S-->>C: {conversationId, answer, idempotencyKey, latency}
 C-->>U: 200 OK + JSON response
 ```
-
 ---
+```
 
 ## 5️⃣ Design Highlights
 
@@ -194,27 +175,34 @@ C-->>U: 200 OK + JSON response
 ### 🧮 **Persistence Schema**
 
 ```sql
-CREATE TABLE conversations (
-  id UUID PRIMARY KEY,
-  title TEXT,
-  created_at TIMESTAMP,
-  metadata JSONB
+CREATE TABLE IF NOT EXISTS conversations (
+    id              UUID PRIMARY KEY,
+    title           TEXT,
+    user_id   TEXT,                     -- null for guest users
+  
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+    deleted         BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-CREATE TABLE messages (
-  id UUID PRIMARY KEY,
-  conversation_id UUID REFERENCES conversations(id),
-  role TEXT,
-  content TEXT,
-  citations JSONB,
-  created_at TIMESTAMP,
-  idempotency_key TEXT
+
+CREATE TABLE IF NOT EXISTS messages (
+    id                UUID PRIMARY KEY ,
+    conversation_id   UUID NOT NULL REFERENCES conversations(id) ON DELETE CASCADE,
+    role              VARCHAR(16) NOT NULL,
+    content           TEXT NOT NULL,
+	reply_to_message_id UUID,
+    latency_ms        BIGINT,
+    idempotency_key   UUID,
+    created_at        TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 ```
 
 Indexes:
 
 ```sql
+CREATE INDEX IF NOT EXISTS idx_conversations_user_updated
+    ON conversations(user_id, updated_at DESC);
 CREATE INDEX idx_msg_convo_id ON messages(conversation_id);
 CREATE INDEX idx_msg_created_at ON messages(created_at);
 CREATE INDEX idx_msg_role ON messages(role);
