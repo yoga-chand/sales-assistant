@@ -178,7 +178,7 @@ C-->>U: 200 OK + JSON response
 CREATE TABLE IF NOT EXISTS conversations (
     id              UUID PRIMARY KEY,
     title           TEXT,
-    user_id   TEXT,                     -- null for guest users
+    user_id         TEXT,                     
     created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
     deleted         BOOLEAN NOT NULL DEFAULT FALSE
