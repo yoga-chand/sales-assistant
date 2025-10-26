@@ -1,4 +1,3 @@
-2025-10-26 10:56:50.784 INFO  [main] c.apple.salesassistant.Application - Starting Application using Java 21.0.8 with PID 28688 (/Volumes/Personal/Studies/Interview/Apple/sales-assistant/build/classes/java/main started by yoga in /Volumes/Personal/Studies/Interview/Apple/sales-assistant)
 2025-10-26 10:56:50.784 INFO  [main] c.apple.salesassistant.Application - The following 1 profile is active: "db"
 2025-10-26 10:56:55.333 INFO  [main] c.apple.salesassistant.Application - Started Application in 4.874 seconds (process running for 5.075)
 2025-10-26 10:57:10.431 INFO  [http-nio-8080-exec-1] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=AuthUser[id=u3, email=admin@demo, roles=[ROLE_ADMIN], scopes=[kb:read:detail, audit:read, chat:invoke, conv:read, conv:write, admin:model:set, conv:read:any]] method=POST uri=/v1/conversations status=200 duration=6436ms
@@ -22,11 +21,14 @@
 2025-10-26 11:01:37.434 INFO  [http-nio-8080-exec-5] c.a.s.auth.service.AuthService - User analyst@demo authenticated successfully
 2025-10-26 11:01:37.435 INFO  [http-nio-8080-exec-5] c.a.s.auth.service.TokenService - Generating JWT for user analyst@demo with roles=[ROLE_ANALYST] and scopes=[kb:read:detail, chat:invoke, conv:read, conv:write]
 2025-10-26 11:01:37.443 INFO  [http-nio-8080-exec-5] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=anonymous method=POST uri=/v1/auth/login status=200 duration=103ms
-2025-10-26 11:43:26.825 INFO  [Test worker] c.a.s.c.a.ConversationControllerTest - Starting ConversationControllerTest using Java 21.0.8 with PID 29581 (started by yoga in /Volumes/Personal/Studies/Interview/Apple/sales-assistant)
-2025-10-26 11:43:26.826 INFO  [Test worker] c.a.s.c.a.ConversationControllerTest - The following 1 profile is active: "db"
-2025-10-26 11:51:13.962 INFO  [Test worker] c.a.s.c.a.ConversationControllerTest - Starting ConversationControllerTest using Java 21.0.8 with PID 29659 (started by yoga in /Volumes/Personal/Studies/Interview/Apple/sales-assistant)
-2025-10-26 11:51:13.963 INFO  [Test worker] c.a.s.c.a.ConversationControllerTest - The following 1 profile is active: "db"
-2025-10-26 11:51:15.176 INFO  [Test worker] c.a.s.c.a.ConversationControllerTest - Started ConversationControllerTest in 1.434 seconds (process running for 1.967)
-2025-10-26 11:53:21.220 INFO  [Test worker] c.a.s.c.a.ConversationControllerTest - Starting ConversationControllerTest using Java 21.0.8 with PID 29683 (started by yoga in /Volumes/Personal/Studies/Interview/Apple/sales-assistant)
-2025-10-26 11:53:21.221 INFO  [Test worker] c.a.s.c.a.ConversationControllerTest - The following 1 profile is active: "db"
-2025-10-26 11:53:22.448 INFO  [Test worker] c.a.s.c.a.ConversationControllerTest - Started ConversationControllerTest in 1.441 seconds (process running for 1.958)
+
+2025-10-26 12:16:22.793 ERROR [http-nio-8080-exec-8] c.a.s.auth.api.filter.JwtAuthFilter - JWT auth failed: JWT strings must contain exactly 2 period characters. Found: 1
+2025-10-26 12:16:22.798 INFO  [http-nio-8080-exec-8] c.a.s.a.h.LoggingAuthenticationEntryPoint - Unauthorized access attempt detected path=/v1/conversations reason=Full authentication is required to access this resource
+
+2025-10-26 12:16:25.741 INFO  [http-nio-8080-exec-9] c.a.s.auth.service.AuthService - Authenticating user with email: analyst@demo
+2025-10-26 12:16:25.845 INFO  [http-nio-8080-exec-9] c.a.s.auth.service.AuthService - User analyst@demo authenticated successfully
+2025-10-26 12:16:25.845 INFO  [http-nio-8080-exec-9] c.a.s.auth.service.TokenService - Generating JWT for user analyst@demo with roles=[ROLE_ANALYST] and scopes=[kb:read:detail, chat:invoke, conv:read, conv:write]
+2025-10-26 12:16:25.847 INFO  [http-nio-8080-exec-9] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=anonymous method=POST uri=/v1/auth/login status=200 duration=110ms
+2025-10-26 12:16:46.418 INFO  [http-nio-8080-exec-10] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=AuthUser[id=u2, email=analyst@demo, roles=[ROLE_ANALYST], scopes=[kb:read:detail, chat:invoke, conv:read, conv:write]] method=POST uri=/v1/conversations status=200 duration=5467ms
+2025-10-26 12:17:43.533 INFO  [http-nio-8080-exec-2] c.a.s.chat.service.MessageService - [replyToMessage] Completed requestId=a2bf01a0-0ef6-4fa6-afdf-8bdf25ce2299 latency=2396ms
+2025-10-26 12:17:43.537 INFO  [http-nio-8080-exec-2] c.a.s.a.a.filter.AuditLoggingFilter - [AUDIT] user=anonymous method=POST uri=/v1/messages:complete status=200 duration=2401ms

@@ -17,75 +17,131 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
 ## 2️⃣ Component Architecture
 
 ```mermaid
-flowchart TB
-  %% Clients
-  subgraph Clients[Client Applications]
-    Web[Web / Mobile / Postman / CLI]
-  end
+ ┌────────────────────────────────────────────────────────────┐
+ │                     Client Applications                    │
+ │  (Web / Mobile)                            │
+ └────────────────────────────────────────────────────────────┘
+                 │
+                 ▼
+ ┌────────────────────────────────────────────────────────────┐
+ │                    API Gateway Layer                       │
+ │  • JWT Authentication / Guest Access                       │
+ │  • RBAC Enforcement (ROLE_ADMIN, ROLE_ANALYST, ROLE_GUEST)  │
+ │  • Global Audit Logging (100 % coverage)                    │
+ └────────────────────────────────────────────────────────────┘
+                 │
+                 ▼
+ ┌────────────────────────────────────────────────────────────┐
+ │                   Sales-Assistant Service                  │
+ │  (Single Spring Boot microservice)                         │
+ │                                                            │
+ │  Modules:                                                  │
+ │  • Auth & RBAC (Spring Security + JWT)                     │
+ │  • Conversation / Message Management (JPA + PostgreSQL)    │
+ │  • Knowledge Base (chunked text KB + ABAC policy)          │
+ │  • LLM Provider Strategy (OpenAI / Ollama)                 │
+ │  • Audit Logging & Metrics                                 │
+ └────────────────────────────────────────────────────────────┘
+                 │
+                 ▼
+ ┌────────────────────────────────────────────────────────────┐
+ │                    External AI Providers                   │
+ │  • OpenAI (gpt-4o-mini)                                   │
+ │  • Ollama (llama3.2:latest local model)                    │
+ └────────────────────────────────────────────────────────────┘
+                 │
+                 ▼
+ ┌────────────────────────────────────────────────────────────┐
+ │                  Persistence Layer (PostgreSQL)             │
+ │  • Conversations                                            │
+ │  • Messages (assistant/user content + citations JSONB)      │
+ │  • Operations (async future extension)                      │
+ └────────────────────────────────────────────────────────────┘
 
-  %% API Gateway / Security Edge
-  Clients --> APIGW[API Gateway Layer
-• JWT Authentication / Guest Access
-• RBAC (ADMIN, ANALYST, GUEST)
-• Global Audit Logging]
-
-  %% Service
-  APIGW --> SA[Sales-Assistant Service (Spring Boot)]
-
-  %% Internal Modules of Service
-  subgraph Modules[Sales-Assistant Modules]
-    Auth[Auth & RBAC (Spring Security + JWT)]
-    Conv[Conversations & Messages (JPA + PostgreSQL)]
-    KB[Knowledge Base (Chunked KB + ABAC Policy)]
-    Strat[LLM Provider Strategy (OpenAI / Ollama)]
-    Audit[Audit Logging & Metrics]
-  end
-
-  SA --> Modules
-
-  %% Persistence
-  DB[(PostgreSQL)]
-  Conv --- DB
-  Audit --- DB
-
-  %% Future async ops (designed, optional)
-  Ops[(Operations Table for Async Jobs)]
-  DB -. future .- Ops
-
-  %% External LLM Providers
-  Strat --> OpenAI[OpenAI: gpt-4o-mini]
-  Strat --> Ollama[Ollama: llama3.2:latest]
 ```
 
 ---
 
 ## 3️⃣ Core Use Cases
+```mermaid
+flowchart LR
+%% Actors
+actor_guest([Guest])
+actor_analyst([Analyst])
+actor_admin([Admin])
 
-| Role        | Description                                              | Endpoints                                                                                      |
-| ----------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| **Guest**   | Interact anonymously without history.                    | `POST /api/v1/messages:complete`                                                               |
-| **Analyst** | Authenticated user; view/create conversations; query KB. | `POST /v1/conversations`, `POST /v1/conversations/{id}/messages`, `GET /v1/conversations/{id}` |
-| **Admin**   | Manage users and inspect audit trails.                   | `GET /v1/audit`, `POST /v1/config/providers` *(future)*                                        |
 
+%% Use cases (ellipses)
+uc_guest_chat(((Guest Chat Without History)))
+uc_start_conv(((Create Conversation)))
+uc_post_msg(((Post Message to Conversation)))
+uc_view_conv(((View Conversation / Messages)))
+uc_gen_report(((Generate Sales Report — async future)))
+uc_view_audit(((View Audit Logs)))
+uc_manage_providers(((Manage Providers & Models — future)))
+uc_manage_rbac(((Configure RBAC/ABAC Policies)))
+
+
+%% Associations
+actor_guest --- uc_guest_chat
+
+
+actor_analyst --- uc_start_conv
+actor_analyst --- uc_post_msg
+actor_analyst --- uc_view_conv
+actor_analyst --- uc_gen_report
+
+
+actor_admin --- uc_view_audit
+actor_admin --- uc_manage_providers
+actor_admin --- uc_manage_rbac
+
+
+%% Notes
+classDef future fill:#f5f5f5,stroke:#bbb,color:#555,stroke-dasharray: 3 3;
+class uc_gen_report,uc_manage_providers future;
 ---
 
 ## 4️⃣ Sequence Diagram (Chat Flow)
 
 ```
-User → ChatController : POST /v1/conversations
-ChatController → ConversationService : createAndComplete()
-ConversationService → GroundedChatService : process()
-GroundedChatService → KbRetriever : topK(userQuery, k)
-KbRetriever → KbPolicy : canSee(userContext, chunk)
-KbPolicy → GroundedChatService : allowedChunks
-GroundedChatService → LlmProviderRouter : get(activeProvider)
-LlmProviderRouter → OpenAI / Ollama Adapter : chat()
-Adapter → LLM Model : prompt(systemPrompt + context)
-Adapter → GroundedChatService : answer
-GroundedChatService → ConversationService : {answer, citations}
-ConversationService → DB : saveConversation(), saveMessages()
-ConversationService → ChatController : 200 OK + LLM Response
-ChatController → User : JSON {conversationId, answer, citations}
+sequenceDiagram
+autonumber
+participant U as User (Web/Mobile)
+participant G as API Gateway / Security
+participant C as ConversationController
+participant S as ConversationService
+participant GC as ChatService
+participant R as KbRetriever
+participant P as KbPolicy
+participant PR as LlmProviderRouter
+participant LA as LLM Adapter (OpenAI/Ollama)
+participant DB as PostgreSQL
+
+
+U->>G: POST /v1/conversations {title, content, includeCitations, topK}
+G->>C: Forward (JWT/Guest resolved)
+C->>S: createAndComplete(title, metadata, content, flags)
+S->>DB: INSERT conversation
+S->>DB: CHECK duplicate user message
+alt not duplicate
+S->>DB: INSERT user message (role=user)
+S->>GC: process(content, userContext, topK)
+GC->>R: topK(query, k)
+R-->>GC: candidate chunks
+GC->>P: canSee(userContext, chunk*)
+P-->>GC: allowed chunks
+GC->>PR: get(activeProvider)
+PR-->>GC: provider
+GC->>LA: chat(systemPrompt + CONTEXT, user)
+LA-->>GC: answer
+GC-->>S: {answer, citations}
+S->>DB: INSERT assistant message (idempotencyKey)
+else duplicate
+S->>DB: SELECT last assistant
+end
+S-->>C: {conversationId, answer, idempotencyKey, latency}
+C-->>U: 200 OK + JSON response
 ```
 
 ---
@@ -190,26 +246,11 @@ Planned enhancement: **async task queue ( Redis + Spring @Async )** returning `2
 
 ---
 
-## 9️⃣ Test Coverage Summary
-
-| Layer            | Tool / Framework      | Example Test                                     |
-| ---------------- | --------------------- | ------------------------------------------------ |
-| Controller       | MockMvc + JUnit 5     | `GuestControllerTest`                            |
-| Service          | Mockito               | `ConversationServiceImplTest`                    |
-| LLM Adapters     | MockRestServiceServer | `OpenAiLlmProviderTest`, `OllamaLlmProviderTest` |
-| Security         | Spring Security Test  | `AuthContextsTest`                               |
-| Audit            | Logback ListAppender  | `AuditLoggingFilterTest`                         |
-| Persistence      | H2 @ DataJpaTest      | `MessageRepositoryTest`                          |
-| Retrieval/Policy | Pure JUnit            | `GroundedChatServiceTest`, `KbPolicyTest`        |
-
----
-
 ## 🔜 10️⃣ Future Enhancements
 
 * **Async LLM Pipeline** — Redis Queue + Worker Service for long running tasks
 * **Workflow Actions** — Report generation triggers
 * **Admin Console** — Manage users & view audit dashboard
-* **Prometheus/Grafana** — Real-time metrics and latency monitoring
 
 ---
 
@@ -226,7 +267,7 @@ Access endpoints:
 
 * Guest chat: `POST /api/v1/messages:complete`
 * Analyst: `POST /v1/conversations`
-* Logs: `logs/audit.log`
+* Logs: `logs/audit.log` 
 
 ---
 
@@ -239,3 +280,17 @@ Access endpoints:
 | `perf_metrics.txt` | 50-request latency sample                       |
 | `kb.txt`           | Demo knowledge base (Apple Sales FY2023–FY2025) |
 | `tests/`           | JUnit suite (> 90 % coverage)                   |
+
+### Evidences:
+
+#### Audit Logs 
+![auditlogs.png](artifacts/auditlogs.png)
+
+#### Analyst Login
+![Login.png](artifacts/Login.png)
+
+#### Analyst initiating a conversation
+![create_conversation.png](artifacts/create_conversation.png)
+
+#### Guest not provided with the product details
+![](artifacts/Guest_minimal_access.png)
