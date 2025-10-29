@@ -13,8 +13,62 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
 
 ---
 
-## 2 Component Architecture
+## 2 Component Diagram
 
+```mermaid
+flowchart TB
+  A[Client Applications Web Mobile]
+
+  subgraph S[Sales Assistant Service Spring Boot]
+    API[REST API endpoints v1/auth/login v1/conversations/*/messages v1/messages v1/operations]
+    SEC[Auth and RBAC Spring Security JWT]
+    CLF[ML Sentence Classifier Intent Routing]
+    RET[KB Retriever with ABAC]
+    LLMO[LLM Orchestrator OpenAI or Ollama]
+    SYNC[Sync Handler direct LLM optional streaming]
+    ASYNC[Async Orchestrator enqueue and operations]
+    AUD[Audit and Metrics]
+  end
+
+  Q[Job Queue]
+  WK[LLM Worker Service]
+  R1[Redis for API layer Idempotency and Short Response Cache]
+  R2[Redis for Worker layer Job Deduplication and Result Cache]
+  DB[PostgreSQL Conversations Messages Operations]
+  AI[External AI Providers OpenAI and Ollama]
+
+  A --> API
+  API --> SEC
+  API --> CLF
+
+  CLF --> SYNC
+  CLF --> ASYNC
+  CLF --> LLMO
+
+  SYNC --> RET
+  RET --> LLMO
+  LLMO --> AI
+  SYNC --> DB
+  SYNC --> R1
+  SYNC --> AUD
+
+  ASYNC --> Q
+  ASYNC --> R1
+
+  WK --> Q
+  WK --> R2
+  WK --> RET
+  RET --> LLMO
+  LLMO --> AI
+  WK --> DB
+  WK --> AUD
+
+  API --> DB
+  RET --> DB
+
+
+```
+## 2.1 Component Diagram(Existing Implementation)
 ```
  ┌────────────────────────────────────────────────────────────┐
  │                     Client Applications                    │
@@ -61,42 +115,33 @@ Built using **Spring Boot (Java 21)** and integrated with **OpenAI / Ollama** fo
 ---
 ## 3 Core Use Cases
 ```mermaid
-flowchart LR
-%% Actors
-actor_guest([Guest])
-actor_analyst([Analyst])
-actor_admin([Admin])
+flowchart TB
+  subgraph Actors
+    Guest[Guest]
+    User[Authenticated user]
+    Admin[Admin]
+  end
 
+  subgraph UseCases
+    UC1[Login]
+    UC2[Create conversation]
+    UC3[Send message]
+    UC4[View conversation messages]
+    UC5[Send message]
+    UC6[Manage knowledge base]
+    UC7[View audit logs]
+  end
 
-%% Use cases (ellipses)
-uc_guest_chat(((Guest Chat Without History)))
-uc_start_conv(((Create Conversation)))
-uc_post_msg(((Post Message to Conversation)))
-uc_view_conv(((View Conversation / Messages)))
-uc_gen_report(((Generate Sales Report — async future)))
-uc_view_audit(((View Audit Logs)))
-uc_manage_providers(((Manage Providers & Models — future)))
-uc_manage_rbac(((Configure RBAC/ABAC Policies)))
+  User --> UC1
+  User --> UC2
+  User --> UC3
+  User --> UC4
 
+  Guest --> UC5
 
-%% Associations
-actor_guest --- uc_guest_chat
+  Admin --> UC6
+  Admin --> UC7
 
-
-actor_analyst --- uc_start_conv
-actor_analyst --- uc_post_msg
-actor_analyst --- uc_view_conv
-actor_analyst --- uc_gen_report
-
-
-actor_admin --- uc_view_audit
-actor_admin --- uc_manage_providers
-actor_admin --- uc_manage_rbac
-
-
-%% Notes
-classDef future fill:#f5f5f5,stroke:#bbb,color:#555,stroke-dasharray: 3 3;
-class uc_gen_report,uc_manage_providers future;
 ```
 ---
 
@@ -105,41 +150,69 @@ class uc_gen_report,uc_manage_providers future;
 ```mermaid
 sequenceDiagram
 autonumber
-participant U as User (Web/Mobile)
-participant G as API Gateway / Security
-participant C as ConversationController
-participant S as ConversationService
-participant GC as ChatService
-participant R as KbRetriever
-participant P as KbPolicy
-participant PR as LlmProviderRouter
-participant LA as LLM Adapter (OpenAI/Ollama)
+participant Client
+participant API as Sales Assistant API
+participant Security as Spring Security JWT
+participant Classifier as ML Classifier
+participant Retriever as KB Retriever ABAC
+participant Orchestrator as LLM Orchestrator
+participant Provider as AI Provider
+participant Queue as Job Queue
+participant Worker as LLM Worker
+participant RedisAPI as Redis API layer
+participant RedisWorker as Redis Worker layer
 participant DB as PostgreSQL
 
+Client->>API: POST v1/auth/login optional
+API->>Security: If credentials present validate and issue JWT
+Security-->>Client: JWT token when authenticated
 
-U->>G: POST /v1/conversations {title}
-G->>C: Forward (JWT/Guest resolved)
-C->>S: createAndComplete(title)
-S->>DB: INSERT conversation
-S->>DB: CHECK duplicate user message
-alt not duplicate
-S->>DB: INSERT user message (role=user)
-S->>GC: process(content, userContext, topK)
-GC->>R: topK(query, k)
-R-->>GC: candidate chunks
-GC->>P: canSee(userContext, chunk*)
-P-->>GC: allowed chunks
-GC->>PR: get(activeProvider)
-PR-->>GC: provider
-GC->>LA: chat(systemPrompt + CONTEXT, user)
-LA-->>GC: answer
-GC-->>S: {answer}
-S->>DB: INSERT assistant message (idempotencyKey)
-else duplicate
-S->>DB: SELECT last assistant
+Client->>API: Send message
+API->>Security: If JWT present verify roles else mark as guest
+
+alt Guest path sync only no classifier no persistence
+  API->>Retriever: Select top K chunks allowed for guest
+  Retriever-->>API: Chunks
+  API->>Orchestrator: Build prompt with guest system prompt and chunks
+  Orchestrator->>Provider: Chat completion
+  Provider-->>Orchestrator: Answer with citations
+  Orchestrator-->>API: Answer
+  API-->>Client: 200 answer
+else Authenticated user path with classifier and routing
+  API->>Classifier: Classify intent and confidence
+  Classifier-->>API: Intent label
+  opt Route sync
+    API->>Retriever: Select top K chunks with ABAC
+    Retriever-->>API: Chunks
+    API->>Orchestrator: Build prompt with system prompt and chunks
+    Orchestrator->>Provider: Chat completion
+    Provider-->>Orchestrator: Answer with citations
+    Orchestrator-->>API: Answer
+    API->>DB: Persist user and assistant messages
+    API->>RedisAPI: Optional short ttl response
+    API-->>Client: 200 answer
+  end
+  opt Route async
+    API->>DB: Create operation queued
+    API->>Queue: Enqueue job
+    API->>RedisAPI: Optional placeholder cache
+    API-->>Client: 202 operation id
+    Worker->>Queue: Consume job
+    Worker->>RedisWorker: Set idempotency and dedupe
+    Worker->>Retriever: Select chunks with ABAC
+    Retriever-->>Worker: Chunks
+    Worker->>Orchestrator: Build prompt and call provider
+    Orchestrator->>Provider: Chat completion
+    Provider-->>Orchestrator: Answer with citations
+    Worker->>DB: Persist assistant message and mark completed
+    Worker->>RedisWorker: Optional result cache
+    Client->>API: Later get v1/conversations/{conversationId}/messages
+    API->>DB: Read messages
+    DB-->>API: Messages including assistant reply
+    API-->>Client: 200 messages
+  end
 end
-S-->>C: {conversationId, answer, idempotencyKey, latency}
-C-->>U: 200 OK + JSON response
+
 ```
 ---
 

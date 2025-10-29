@@ -130,7 +130,7 @@ public class ConversationService {
             log.info("Duplicate detected for conversation {} input='{}', returning previous answer",
                     conversationId, message);
             MessageEntity lastAssistant = messageRepository
-                    .findTopByConversationIdAndRoleOrderByCreatedAtDesc(conversationId, "assistant")
+                    .findTopByConversationIdAndRoleOrderByCreatedAtDesc(conversationId, MessageEntity.Role.assistant)
                     .orElseThrow(() -> new IllegalArgumentException("No assistant message found for conversation"));
             return Optional.of(toResult(lastAssistant));
         }

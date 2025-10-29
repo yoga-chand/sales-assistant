@@ -12,7 +12,7 @@ public interface MessageRepository extends JpaRepository<MessageEntity, UUID> {
 
     Optional<MessageEntity> findTopByConversationIdAndContentOrderByCreatedAtDesc(UUID conversationId, String content);
 
-    Optional<MessageEntity> findTopByConversationIdAndRoleOrderByCreatedAtDesc(UUID conversationId, String role);
+    Optional<MessageEntity> findTopByConversationIdAndRoleOrderByCreatedAtDesc(UUID conversationId, MessageEntity.Role role);
 
     List<MessageEntity> findAllByConversationIdOrderByCreatedAtAsc(UUID conversationId);
 }
